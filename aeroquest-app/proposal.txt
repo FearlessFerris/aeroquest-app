@@ -1,0 +1,20 @@
+Project Proposal 
+
+1. React and Node will be the text stack used for this Capstone Project Application 
+2. This project will be an evenly focused full stack application 
+3. A website that will interact with a public API ( avationstackAPI ) https://aviationstack.com/
+4. The goal for this project is to demonstrate my ability to successfully create a fullstack application
+   that follows best practices and a good grasp of knowdledge with web development 
+5. Avation enthusiasts will be my primary target audience
+6. All data I plan on using is from the AvationStack API 
+7. 
+    a. Database Schema ( users, bookmarks, searches )
+    b. Perhaps not all data will be avaliable with every request thus I need to ensure I have 
+       conditional rendering for such instances 
+    c. Yes, user passwords, I also need to ensure authorization middleware is successfully 
+       implemented in routes 
+    d. Search Airplanes, Airlines, Airports ( AvationStack API ), save bookmarks and make
+       user profiles 
+    e. User will create an account, login, make requests, save bookmarks 
+    f. This application should have scalability that is beyond a CRUD app as I intend to implement 
+       the REST structure and add features as users needs change and suggestions are made 
