@@ -29,7 +29,7 @@ require('dotenv').config(); // Load environment variables from .env file
 let DB_URI;
 
 if (process.env.NODE_ENV === 'test') {
-    DB_URI = 'postgresql:///aeroquest_test';
+    DB_URI = process.env.TEST_DATABASE_URL || 'postgresql:///aeroquest_test';
 } else {
     DB_URI = process.env.DATABASE_URL || 'postgresql:///aeroquest';
 }
@@ -46,3 +46,4 @@ db.connect()
     .catch(err => console.error('Database connection error', err.stack));
 
 module.exports = db;
+
