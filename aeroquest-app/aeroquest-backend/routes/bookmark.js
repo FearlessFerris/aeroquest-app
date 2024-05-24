@@ -26,7 +26,9 @@ router.post( '/add', authorizationMiddleware, async ( req, res, next ) => {
         RETURNING *;
         `;
         const result = await db.query( query, [ userId, endpoint, responseData, notes ]);
+        console.log( 'Result:', result );
         const bookmark = result.rows[0];
+        console.log( 'Added Bookmark:', bookmark );
         res.status( 200 ).json({ message: `Bookmark added successfully!`, bookmark });
     }   
     catch( error ){

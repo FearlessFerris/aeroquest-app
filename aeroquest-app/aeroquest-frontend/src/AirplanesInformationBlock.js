@@ -172,27 +172,33 @@ function AirplanesInformationBlock({ data }) {
                         Authorization: `Bearer ${token}`
                     }
                 });
-                console.log(`This is my response data!`, response.data)
 
-                setBookmarks((prevBookmarks) => [
-                    ...prevBookmarks,
-                    response.data
-                ]);
-
-                setItemInfo((prevInfo) => ({
-                    ...prevInfo,
-                    toggleSuccessMessage: true,
-                    successMessage: `Bookmark successfully added for AirplaneId: ${itemInfo.chosenItem.id}`,
-                    newBookmarkId: itemInfo.chosenItem.id
-                }));
-
-                if (!response.data.id) {
+                if (!response.data || !response.data.bookmark || !response.data.bookmark.response_data || !response.data.bookmark.response_data.id ) {
                     throw new Error('No existing bookmark ID in response data');
                 }
+
+                setBookmarks(( prevBookmarks ) => [
+                    ...prevBookmarks,
+                    response.data.bookmark
+                ]);
+
+                setItemInfo(( prevInfo ) => ({
+                    ...prevInfo,
+                    toggleSuccessMessage: true,
+                    successMessage: `Bookmark successfully added for AirplaneID: ${ response.data.bookmark.id }`,
+                    newBookmarkId: response.data.bookmark.id,
+                    toggleNotes: false,
+                    notes: '',
+                    actionType: 'added'
+                }));
             }
         } catch (error) {
             console.error(`Error occurred adding bookmark with notes!`);
-            console.error(error);
+            setItemInfo((prevInfo) => ({
+            ...prevInfo,
+            toggleErrorMessage: true,
+            errorMessage: `Error occurred: ${error.message}`
+        }));
         }
     }
 
