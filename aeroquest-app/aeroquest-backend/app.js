@@ -24,13 +24,13 @@ app.use( express.urlencoded({ extended: true }) );
 // Routers 
 const bookmarkRouter = require( './routes/bookmark' );
 const searchRouter = require( './routes/search' );
-const userRouter = require( './routes/users' );
+const userRouter = require( './routes/user' );
 
 
 // Route Prefix's 
 app.use( '/bookmark', bookmarkRouter );
 app.use( '/search', searchRouter );
-app.use( '/users', userRouter );
+app.use( '/user', userRouter );
 
 
 // 404 Error Handler 

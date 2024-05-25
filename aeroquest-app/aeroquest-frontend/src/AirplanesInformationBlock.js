@@ -5,7 +5,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography } from '@mui/material';
 import { AirplanemodeActive } from '@mui/icons-material';
-import axios from 'axios';
+import apiClient from './apiClient';
 import { jwtDecode } from 'jwt-decode';
 
 
@@ -37,7 +37,7 @@ function AirplanesInformationBlock({ data }) {
                 if (!userId) {
                     throw new Error(`Authorization Token not found!`);
                 }
-                const response = await axios.get(`/bookmark/list/${userId}`, {
+                const response = await apiClient.get(`/bookmark/list/${userId}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     },
@@ -101,7 +101,7 @@ function AirplanesInformationBlock({ data }) {
                 notes: itemInfo.notes,
             };
 
-            const response = await axios.post('/bookmark/add', info, {
+            const response = await apiClient.post('/bookmark/add', info, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -145,7 +145,7 @@ function AirplanesInformationBlock({ data }) {
             const existingBookmark = bookmarks.find((bookmark) => bookmark.response_data.id === itemInfo.chosenItem.id);
             if (existingBookmark) {
                 const updatedBookmark = { ...existingBookmark, notes: itemInfo.notes };
-                await axios.put(`/bookmark/modify/${existingBookmark.id}`, updatedBookmark, {
+                await apiClient.put(`/bookmark/modify/${existingBookmark.id}`, updatedBookmark, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -167,7 +167,7 @@ function AirplanesInformationBlock({ data }) {
                     notes: itemInfo.notes,
                 };
 
-                const response = await axios.post('/bookmark/add', info, {
+                const response = await apiClient.post('/bookmark/add', info, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

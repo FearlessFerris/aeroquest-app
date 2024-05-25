@@ -5,7 +5,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation, useLoaderData } from 'react-router-dom';
 import { Box, TextField, Button } from '@mui/material';
-import axios from 'axios';
+import apiClient from './apiClient';
 
 
 // Components & Necessary Files 
@@ -15,8 +15,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateField } from '@mui/x-date-pickers/DateField';
 import dayjs from 'dayjs';
 import EditForm from './EditForm';
-
-axios.defaults.baseURL = 'http://localhost:5000'; // Or whatever URL your backend server is running on
 
 
 // Create User Component 
@@ -76,7 +74,7 @@ function CreateUser() {
         }
     
         try {
-            const response = await axios.post( '/users/create', formDataToSend );
+            const response = await apiClient.post( '/users/create', formDataToSend );
             const successMessage = `Congratulations ${formData.username}, you have successfully created an account!`
             navigate('/', { state: { message: successMessage }});
             setFormData(initialState);

@@ -25,7 +25,7 @@ const AIRPORTS_ENDPOINT_BASE = 'http://api.aviationstack.com/v1/airports';
 router.get( '/:type', async ( req, res, next ) => {
     try{
         const { type } = req.params;
-        const { searchTerm, offset = 0, limit = 30 } = req.query;
+        const { searchTerm, offset = 0, limit = 10 } = req.query;
         console.log( searchTerm, offset, limit );
         let endpoint = '';
 

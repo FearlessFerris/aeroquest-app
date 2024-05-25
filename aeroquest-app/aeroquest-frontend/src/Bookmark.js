@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react'
 import { Button, Card, CardContent, Collapse, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Fade, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import BookmarksIcon from '@mui/icons-material/Bookmarks';
-import axios from 'axios';
+import apiClient from './apiClient';
 import { jwtDecode } from 'jwt-decode';
 
 
@@ -41,7 +41,7 @@ function Bookmark() {
         const fetchBookmarks = async () => {
             try {
                 const { userId, token } = getUserId();
-                const response = await axios.get(`/bookmark/list/${userId}`, {
+                const response = await apiClient.get(`/bookmark/list/${userId}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -85,7 +85,7 @@ function Bookmark() {
         try {
             const { userId, token } = getUserId();
             const { chosenItem, notes } = itemInfo;
-            const response = await axios.put(`/bookmark/modify/${chosenItem.id}`,
+            const response = await apiClient.put(`/bookmark/modify/${chosenItem.id}`,
                 { notes },
                 {
                     headers: {
@@ -109,7 +109,7 @@ function Bookmark() {
     const handleDeleteBookmark = async (bookmarkId) => {
         try {
             const { userId, token } = getUserId();
-            await axios.delete(`/bookmark/remove/${bookmarkId}`, {
+            await apiClient.delete(`/bookmark/remove/${bookmarkId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

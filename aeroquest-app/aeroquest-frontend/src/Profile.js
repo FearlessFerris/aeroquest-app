@@ -6,7 +6,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Avatar, Box, Card, CardHeader, Typography, TextField, Button } from '@mui/material'
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import axios from 'axios';
+// import axios from 'axios';
+import apiClient from './apiClient';
 import { jwtDecode } from 'jwt-decode';
 
 
@@ -34,7 +35,7 @@ function Profile() {
                         Authorization: `Bearer ${token}`, 
                     },
                 };
-                const response = await axios.get( `/users/profile/${ config.id }`, config );
+                const response = await apiClient.get( `/user/profile/${ config.id }`, config );
                 setProfile( response.data.data );
             }
             catch( error ){
@@ -60,7 +61,7 @@ function Profile() {
             };
 
             const userId = getUserId();
-            const response = await axios.put( `/users/update/${ userId }`, editedProfile, config );
+            const response = await apiClient.put( `/user/update/${ userId }`, editedProfile, config );
             console.log( 'Profile updated successfully:', response.data );
             const updatedProfile = response.data.user;
             setIsEditing( false ); 

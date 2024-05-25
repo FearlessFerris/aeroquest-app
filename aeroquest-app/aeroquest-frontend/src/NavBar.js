@@ -72,7 +72,7 @@ function NavBar({ isLoggedIn, handleLogout, clearSearchResults, userProfile }) {
                     <>
                     <Typography
                     component = { Link }
-                    to = '/users/profile'
+                    to = '/user/profile'
                     color = 'white'
                     sx = {{
                         color: 'white', 
@@ -88,7 +88,7 @@ function NavBar({ isLoggedIn, handleLogout, clearSearchResults, userProfile }) {
 
                     <Typography 
                     component = { Link } 
-                    to = '/users/bookmark' 
+                    to = '/user/bookmark' 
                     color = 'white'
                     sx = {{ 
                         color: 'white', 
@@ -124,7 +124,7 @@ function NavBar({ isLoggedIn, handleLogout, clearSearchResults, userProfile }) {
                         <>
                     <Typography 
                     component = { Link } 
-                    to = '/users/login' 
+                    to = '/user/login' 
                     color = 'white'
                     sx = {{ 
                         color: 'white', 
@@ -140,7 +140,7 @@ function NavBar({ isLoggedIn, handleLogout, clearSearchResults, userProfile }) {
 
                     <Typography 
                     component = { Link } 
-                    to = '/users/create' 
+                    to = '/user/create' 
                     color = 'white'
                     sx = {{ 
                         color: 'white', 

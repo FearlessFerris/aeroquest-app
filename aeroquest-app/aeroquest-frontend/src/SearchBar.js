@@ -4,7 +4,7 @@
 // Dependencies 
 import React, { useState, useEffect } from 'react';
 import { Box, Button, InputLabel, TextField, Typography, Slider, Fade } from '@mui/material';
-import axios from 'axios';
+import apiClient from './apiClient';
 
 
 // Components & Necessary Files 
@@ -18,7 +18,7 @@ import AirportsInformationBlock from './AirportsInformationBlock';
 function SearchBar({ searchResults, setSearchResults }) {
     const [ searchTerm, setSearchTerm ] = useState( '' );
     const [ offset, setOffset ] = useState( 0 );
-    const [ limit, setLimit ] = useState( 30 );
+    const [ limit, setLimit ] = useState( 10 );
     const [ loading, setLoading ] = useState( false );
     const [ selectedType, setSelectedType ] = useState( 'airplanes' );
     const [ visibleSearchResults, setVisibleSearchResults ] = useState([]);
@@ -49,7 +49,7 @@ function SearchBar({ searchResults, setSearchResults }) {
         try {
             setLoading(true);
             setVisibleSearchResults([]);
-            const response = await axios.get(`/search/${selectedType}`, {
+            const response = await apiClient.get(`/search/${selectedType}`, {
                 params: { searchTerm, offset, limit },
             });
             const newResults = response.data.data;
@@ -215,7 +215,7 @@ function SearchBar({ searchResults, setSearchResults }) {
                 > 
                 Number of Results </InputLabel>
                   <Slider 
-                    defaultValue = { 30 }
+                    defaultValue = { 10 }
                     id = 'results-slider'
                     min = { 10 }
                     max = { 100 }

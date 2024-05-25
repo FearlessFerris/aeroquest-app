@@ -5,7 +5,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Switch, withRouter } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-import axios from 'axios';
+import apiClient from './apiClient';
 
 
 // Components & Necessary Files 
@@ -14,6 +14,7 @@ import CreateUser from './CreateUser';
 import Home from './Home';
 import Login from './Login';
 import NavBar from './NavBar';
+import Search from './Search';
 import Profile from './Profile';
 import './static/css/app.css';
 
@@ -25,6 +26,13 @@ function App({ history }) {
   const [ userProfile, setUserProfile ] = useState( null );
   const [ decodedToken, setDecodedToken ] = useState( null );
   const [ searchResults, setSearchResults ] = useState([]);
+
+  useEffect( () => {
+    localStorage.removeItem( 'token' );
+    console.log( localStorage );
+    setIsLoggedIn( false );
+    setUserProfile( null );
+  }, []);
   
   useEffect( () => {
     const token = localStorage.getItem( 'token' );
@@ -42,7 +50,7 @@ function App({ history }) {
 
   const fetchUserProfile = async ( token ) => {
     try {
-      const response = await axios.get( `/users/profile/${ decodedToken.id }`, {
+      const response = await apiClient.get( `/user/profile/${ decodedToken.id }`, {
         headers: { Authorization: `Bearer ${ token }` },
       });
       setUserProfile( response.data.data ); 
@@ -74,10 +82,11 @@ function App({ history }) {
         />
           <Routes> 
             <Route path = '/' element = { <Home /> } />
-            <Route path = '/users/profile' element = { <Profile /> } />
-            <Route path = '/users/login' element = { <Login  setIsLoggedIn = { setIsLoggedIn } setUserProfile = { setUserProfile } /> } /> 
-            <Route path = '/users/create' element = { <CreateUser /> } />
-            <Route path = '/users/bookmark' element = { <Bookmark /> } /> 
+            <Route path = '/search' element = { <Search /> } /> 
+            <Route path = '/user/profile' element = { <Profile /> } />
+            <Route path = '/user/login' element = { <Login  setIsLoggedIn = { setIsLoggedIn } setUserProfile = { setUserProfile } /> } /> 
+            <Route path = '/user/create' element = { <CreateUser /> } />
+            <Route path = '/user/bookmark' element = { <Bookmark /> } /> 
           </Routes>
       </BrowserRouter>
     </div>

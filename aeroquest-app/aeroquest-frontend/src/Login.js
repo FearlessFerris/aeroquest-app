@@ -6,10 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, TextField, Button } from '@mui/material';
 import { jwtDecode } from 'jwt-decode';
-
-import axios from 'axios';
-
-axios.defaults.baseURL = 'http://localhost:5000';
+import apiClient from './apiClient';
 
 // Components & Necessary Files 
 
@@ -39,13 +36,13 @@ function Login({ setIsLoggedIn, setUserProfile }) {
         e.preventDefault();
         const { username, password } = formData;
         try{
-            const response = await axios.post( '/users/login', formData );
+            const response = await apiClient.post( '/user/login', formData );
             if( response && response.data ){
                 const { token } = response.data;
                 localStorage.setItem( 'token', token );
                 setIsLoggedIn( true );
                 const decodedToken = jwtDecode( token );
-                const userProfileResponse = await axios.get(`/users/profile/${ decodedToken.id }`, {
+                const userProfileResponse = await apiClient.get(`/user/profile/${ decodedToken.id }`, {
                     headers: {
                         Authorization: `Bearer ${ token }`
                     }
