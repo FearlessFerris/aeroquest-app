@@ -7,7 +7,7 @@ const cors = require( 'cors' );
 const path = require('path');  
 const app = express();
 const ExpressError = require( './ExpressError' );
-const port = 5000;
+const port = process.env.PORT || 5000;
 const db = require( './db' );
 require( 'dotenv' ).config();
 
