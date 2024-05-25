@@ -28,9 +28,9 @@ const userRouter = require( './routes/user' );
 
 
 // Route Prefix's 
-app.use( '/bookmark', bookmarkRouter );
-app.use( '/search', searchRouter );
-app.use( '/user', userRouter );
+app.use( '/api/bookmark', bookmarkRouter );
+app.use( '/api/search', searchRouter );
+app.use( '/api/user', userRouter );
 
 
 // 404 Error Handler 
@@ -39,12 +39,12 @@ app.use(( req, res, next ) => {
     next( err );
 });
 
-app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
+// app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
-// Catch-all to send back the React index.html file for any unknown paths
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
-});
+// // Catch-all to send back the React index.html file for any unknown paths
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
+// });
 
 // Global Error Handler 
 app.use(( err, req, res, next ) => {
