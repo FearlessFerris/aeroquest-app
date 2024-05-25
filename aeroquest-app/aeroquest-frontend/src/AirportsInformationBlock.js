@@ -280,23 +280,27 @@ function AirplanesInformationBlock({ data }) {
                                 justifyContent: 'center',
                             }}
                         >
+                        { item.country_iso2 && (
+                            <>
                             <Typography
-                                variant='h6'
-                                style={{
-                                    color: 'white',
-                                    marginRight: '1rem'
-                                }}
+                            variant='h6'
+                            style={{
+                                color: 'white',
+                                marginRight: '1rem'
+                            }}
                             >
                                 Country ISO:
                             </Typography>
                             <Typography
-                                variant='h6'
-                                sx={{
-                                    color: 'cyan'
-                                }}
+                            variant='h6'
+                            sx={{
+                                color: 'cyan'
+                            }}
                             >
                                 {item.country_iso2}
                             </Typography>
+                            </>
+                            )}
                         </div>
                         {selectedBoxIndex === index && (
                             <>

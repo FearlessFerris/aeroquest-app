@@ -280,23 +280,27 @@ function AirplanesInformationBlock({ data }) {
                                 justifyContent: 'center'
                             }}
                         >
+                        { item.icao_code && (
+                            <>
                             <Typography
-                                variant='h6'
-                                style={{
-                                    color: 'white',
-                                    marginRight: '1rem'
-                                }}
+                            variant='h6'
+                            style={{
+                                color: 'white',
+                                marginRight: '1rem'
+                            }}
                             >
                                 ICAO Code:
                             </Typography>
                             <Typography
-                                variant='h6'
-                                style={{
-                                    color: 'cyan'
-                                }}
+                            variant='h6'
+                            style={{
+                                color: 'cyan'
+                            }}
                             >
                                 {item.icao_code}
                             </Typography>
+                            </>
+                            )}
                         </div>
                         {selectedBoxIndex === index && (
                             <>

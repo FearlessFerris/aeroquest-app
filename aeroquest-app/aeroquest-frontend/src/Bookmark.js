@@ -275,23 +275,27 @@ function Bookmark() {
                                                     justifyContent: 'center'
                                                 }}
                                             >
+                                            { item.response_data.plane_age && (
+                                                <>
                                                 <Typography
-                                                    variant='h6'
-                                                    style={{
-                                                        color: 'white',
-                                                        marginRight: '1rem'
-                                                    }}
+                                                variant='h6'
+                                                style={{
+                                                    color: 'white',
+                                                    marginRight: '1rem'
+                                                }}
                                                 >
                                                     Plane Age:
                                                 </Typography>
                                                 <Typography
-                                                    variant='h6'
-                                                    style={{
-                                                        color: 'cyan'
-                                                    }}
+                                                variant='h6'
+                                                style={{
+                                                    color: 'cyan'
+                                                }}
                                                 >
                                                     {item.response_data.plane_age}
                                                 </Typography>
+                                                </>
+                                                )}
                                             </div>
                                             <div
                                                 style={{
@@ -299,12 +303,14 @@ function Bookmark() {
                                                     justifyContent: 'center'
                                                 }}
                                             >
+                                            { item.response_data.plane_series && (
+                                                <>
                                                 <Typography
-                                                    variant='h6'
-                                                    style={{
-                                                        color: 'white',
-                                                        marginRight: '1rem'
-                                                    }}
+                                                variant='h6'
+                                                style={{
+                                                    color: 'white',
+                                                    marginRight: '1rem'
+                                                }}
                                                 >
                                                     Plane Series:
                                                 </Typography>
@@ -313,9 +319,11 @@ function Bookmark() {
                                                     style={{
                                                         color: 'cyan'
                                                     }}
-                                                >
+                                                    >
                                                     {item.response_data.plane_series}
                                                 </Typography>
+                                                </>
+                                                )}
                                             </div>
                                             <div
                                                 style={{
@@ -403,12 +411,14 @@ function Bookmark() {
                                                     justifyContent: 'center'
                                                 }}
                                             >
+                                            { item.response_data.construction_number && (
+                                                <>
                                                 <Typography
-                                                    variant='h6'
-                                                    style={{
-                                                        color: 'white',
-                                                        marginRight: '1rem'
-                                                    }}
+                                                variant='h6'
+                                                style={{
+                                                    color: 'white',
+                                                    marginRight: '1rem'
+                                                }}
                                                 >
                                                     Construction Number:
                                                 </Typography>
@@ -417,9 +427,11 @@ function Bookmark() {
                                                     style={{
                                                         color: 'cyan'
                                                     }}
-                                                >
+                                                    >
                                                     {item.response_data.construction_number}
                                                 </Typography>
+                                                </>
+                                                )}
                                             </div>
                                             <div
                                                 style={{
@@ -427,12 +439,14 @@ function Bookmark() {
                                                     justifyContent: 'center'
                                                 }}
                                             >
+                                            { item.response_data.registration_number && (
+                                                <>
                                                 <Typography
-                                                    variant='h6'
-                                                    style={{
-                                                        color: 'white',
-                                                        marginRight: '1rem'
-                                                    }}
+                                                variant='h6'
+                                                style={{
+                                                    color: 'white',
+                                                    marginRight: '1rem'
+                                                }}
                                                 >
                                                     Regristration Number:
                                                 </Typography>
@@ -441,9 +455,11 @@ function Bookmark() {
                                                     style={{
                                                         color: 'cyan'
                                                     }}
-                                                >
+                                                    >
                                                     {item.response_data.registration_number}
                                                 </Typography>
+                                                </>
+                                                )}
                                             </div>
                                             <div
                                                 style={{
@@ -451,12 +467,14 @@ function Bookmark() {
                                                     justifyContent: 'center'
                                                 }}
                                             >
+                                            { item.response_data.production_line && (
+                                                <>
                                                 <Typography
-                                                    variant='h6'
-                                                    style={{
-                                                        color: 'white',
-                                                        marginRight: '1rem'
-                                                    }}
+                                                variant='h6'
+                                                style={{
+                                                    color: 'white',
+                                                    marginRight: '1rem'
+                                                }}
                                                 >
                                                     Production Line:
                                                 </Typography>
@@ -465,9 +483,11 @@ function Bookmark() {
                                                     style={{
                                                         color: 'cyan'
                                                     }}
-                                                >
+                                                    >
                                                     {item.response_data.production_line}
                                                 </Typography>
+                                                </>
+                                                )}
                                             </div>
                                             <div
                                                 style={{
@@ -475,12 +495,14 @@ function Bookmark() {
                                                     justifyContent: 'center'
                                                 }}
                                             >
+                                            { item.response_data.delivery_date && (
+                                                <>
                                                 <Typography
-                                                    variant='h6'
-                                                    sx={{
-                                                        color: 'white',
-                                                        marginRight: '1rem'
-                                                    }}
+                                                variant='h6'
+                                                sx={{
+                                                    color: 'white',
+                                                    marginRight: '1rem'
+                                                }}
                                                 >
                                                     Delivery Date:
                                                 </Typography>
@@ -489,9 +511,11 @@ function Bookmark() {
                                                     sx={{
                                                         color: 'cyan'
                                                     }}
-                                                >
+                                                    >
                                                     {item.response_data.delivery_date}
                                                 </Typography>
+                                                </>
+                                                )}
                                             </div>
                                             <div
                                                 style={{
@@ -499,12 +523,14 @@ function Bookmark() {
                                                     justifyContent: 'center'
                                                 }}
                                             >
+                                            { item.response_data.first_flight_date && (
+                                                <>
                                                 <Typography
-                                                    variant='h6'
-                                                    style={{
-                                                        color: 'white',
-                                                        marginRight: '1rem'
-                                                    }}
+                                                variant='h6'
+                                                style={{
+                                                    color: 'white',
+                                                    marginRight: '1rem'
+                                                }}
                                                 >
                                                     First Flight Date:
                                                 </Typography>
@@ -513,9 +539,11 @@ function Bookmark() {
                                                     style={{
                                                         color: 'cyan'
                                                     }}
-                                                >
+                                                    >
                                                     {item.response_data.first_flight_date}
                                                 </Typography>
+                                                </>
+                                                )}
                                             </div>
                                             <div
                                                 style={{
@@ -721,12 +749,14 @@ function Bookmark() {
                                                     justifyContent: 'center'
                                                 }}
                                             >
+                                            { item.response_data.icao_code && (
+                                                <>
                                                 <Typography
-                                                    variant='h6'
-                                                    style={{
-                                                        color: 'white',
-                                                        marginRight: '1rem'
-                                                    }}
+                                                variant='h6'
+                                                style={{
+                                                    color: 'white',
+                                                    marginRight: '1rem'
+                                                }}
                                                 >
                                                     ICAO Code:
                                                 </Typography>
@@ -735,9 +765,11 @@ function Bookmark() {
                                                     style={{
                                                         color: 'cyan'
                                                     }}
-                                                >
+                                                    >
                                                     {item.response_data.icao_code}
                                                 </Typography>
+                                                </>
+                                                )}
                                             </div>
                                             <div
                                                 variant='h6'

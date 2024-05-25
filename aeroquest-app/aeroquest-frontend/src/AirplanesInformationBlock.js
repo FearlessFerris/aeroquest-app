@@ -280,23 +280,27 @@ function AirplanesInformationBlock({ data }) {
                                 justifyContent: 'center'
                             }}
                         >
-                            <Typography
+                            { item.plane_age && (
+                                <>
+                                <Typography
                                 variant='h6'
                                 style={{
                                     color: 'white',
                                     marginRight: '1rem'
                                 }}
-                            >
+                                >
                                 Plane Age:
                             </Typography>
                             <Typography
-                                variant='h6'
-                                style={{
-                                    color: 'cyan'
-                                }}
+                            variant='h6'
+                            style={{
+                                color: 'cyan'
+                            }}
                             >
                                 {item.plane_age}
                             </Typography>
+                            </>
+                            )}
                         </div>
                         {selectedBoxIndex === index && (
                             <>
@@ -306,23 +310,27 @@ function AirplanesInformationBlock({ data }) {
                                         justifyContent: 'center'
                                     }}
                                 >
+                                { item.plane_series && (
+                                    <>
                                     <Typography
                                         variant='h6'
                                         style={{
                                             color: 'white',
                                             marginRight: '1rem'
                                         }}
-                                    >
+                                        >
                                         Plane Series:
                                     </Typography>
                                     <Typography
-                                        variant='h6'
-                                        style={{
-                                            color: 'cyan'
-                                        }}
+                                    variant='h6'
+                                    style={{
+                                        color: 'cyan'
+                                    }}
                                     >
                                         {item.plane_series}
                                     </Typography>
+                                    </>
+                                    )}
                                 </div>
                                 <div
                                     style={{
@@ -330,23 +338,27 @@ function AirplanesInformationBlock({ data }) {
                                         justifyContent: 'center'
                                     }}
                                 >
+                                { item.plane_status && (
+                                    <>
                                     <Typography
-                                        variant='h6'
-                                        style={{
-                                            color: 'white',
-                                            marginRight: '1rem'
-                                        }}
+                                    variant='h6'
+                                    style={{
+                                        color: 'white',
+                                        marginRight: '1rem'
+                                    }}
                                     >
                                         Plane Status:
                                     </Typography>
                                     <Typography
-                                        variant='h6'
-                                        style={{
-                                            color: 'cyan'
-                                        }}
+                                    variant='h6'
+                                    style={{
+                                        color: 'cyan'
+                                    }}
                                     >
                                         {item.plane_status}
                                     </Typography>
+                                    </>
+                                    )}
                                 </div>
                                 <div
                                     style={{
@@ -410,23 +422,27 @@ function AirplanesInformationBlock({ data }) {
                                         justifyContent: 'center'
                                     }}
                                 >
+                                { item.construction_number && (
+                                    <>
                                     <Typography
-                                        variant='h6'
-                                        style={{
-                                            color: 'white',
-                                            marginRight: '1rem'
-                                        }}
+                                    variant='h6'
+                                    style={{
+                                        color: 'white',
+                                        marginRight: '1rem'
+                                    }}
                                     >
                                         Construction Number:
                                     </Typography>
                                     <Typography
-                                        variant='h6'
-                                        style={{
-                                            color: 'cyan'
-                                        }}
+                                    variant='h6'
+                                    style={{
+                                        color: 'cyan'
+                                    }}
                                     >
                                         {item.construction_number}
                                     </Typography>
+                                    </>
+                                    )}
                                 </div>
                                 <div
                                     style={{
@@ -434,23 +450,27 @@ function AirplanesInformationBlock({ data }) {
                                         justifyContent: 'center'
                                     }}
                                 >
+                                { item.registration_number && (
+                                    <>
                                     <Typography
-                                        variant='h6'
-                                        style={{
-                                            color: 'white',
-                                            marginRight: '1rem'
-                                        }}
+                                    variant='h6'
+                                    style={{
+                                        color: 'white',
+                                        marginRight: '1rem'
+                                    }}
                                     >
                                         Regristration Number:
                                     </Typography>
                                     <Typography
-                                        variant='h6'
-                                        style={{
-                                            color: 'cyan'
-                                        }}
+                                    variant='h6'
+                                    style={{
+                                        color: 'cyan'
+                                    }}
                                     >
                                         {item.registration_number}
                                     </Typography>
+                                    </>
+                                    )}
                                 </div>
                                 <div
                                     style={{
@@ -458,12 +478,14 @@ function AirplanesInformationBlock({ data }) {
                                         justifyContent: 'center'
                                     }}
                                 >
+                                { item.production_line && (
+                                    <>
                                     <Typography
-                                        variant='h6'
-                                        style={{
-                                            color: 'white',
-                                            marginRight: '1rem'
-                                        }}
+                                    variant='h6'
+                                    style={{
+                                        color: 'white',
+                                        marginRight: '1rem'
+                                    }}
                                     >
                                         Production Line:
                                     </Typography>
@@ -472,9 +494,11 @@ function AirplanesInformationBlock({ data }) {
                                         style={{
                                             color: 'cyan'
                                         }}
-                                    >
+                                        >
                                         {item.production_line}
                                     </Typography>
+                                    </>
+                                    )}
                                 </div>
                                 <div
                                     style={{
@@ -482,12 +506,14 @@ function AirplanesInformationBlock({ data }) {
                                         justifyContent: 'center'
                                     }}
                                 >
+                                { item.delivery_date && (
+                                    <>
                                     <Typography
-                                        variant='h6'
-                                        sx={{
-                                            color: 'white',
-                                            marginRight: '1rem'
-                                        }}
+                                    variant='h6'
+                                    sx={{
+                                        color: 'white',
+                                        marginRight: '1rem'
+                                    }}
                                     >
                                         Delivery Date:
                                     </Typography>
@@ -496,9 +522,11 @@ function AirplanesInformationBlock({ data }) {
                                         sx={{
                                             color: 'cyan'
                                         }}
-                                    >
+                                        >
                                         {item.delivery_date}
                                     </Typography>
+                                    </>
+                                    )}
                                 </div>
                                 <div
                                     style={{
@@ -506,23 +534,27 @@ function AirplanesInformationBlock({ data }) {
                                         justifyContent: 'center'
                                     }}
                                 >
+                                { item.first_flight_date && (
+                                    <>
                                     <Typography
-                                        variant='h6'
-                                        style={{
-                                            color: 'white',
-                                            marginRight: '1rem'
-                                        }}
+                                    variant='h6'
+                                    style={{
+                                        color: 'white',
+                                        marginRight: '1rem'
+                                    }}
                                     >
                                         First Flight Date:
                                     </Typography>
                                     <Typography
-                                        variant='h6'
-                                        style={{
-                                            color: 'cyan'
-                                        }}
+                                    variant='h6'
+                                    style={{
+                                        color: 'cyan'
+                                    }}
                                     >
                                         {item.first_flight_date}
                                     </Typography>
+                                    </> 
+                                    )}
                                 </div>
                                 <div
                                     style={{
