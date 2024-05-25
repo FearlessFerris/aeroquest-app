@@ -4,7 +4,6 @@
 // Dependencies 
 const express = require( 'express' );
 const router = express.Router();
-const apiClient = require( 'apiClient' );
 const bcrypt = require( 'bcrypt' );
 const db = require( '../db' );
 const ExpressError = require( '../ExpressError' );
