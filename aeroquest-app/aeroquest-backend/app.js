@@ -28,9 +28,9 @@ const userRouter = require( './routes/user' );
 
 
 // Route Prefix's 
-app.use( '/api/bookmark', bookmarkRouter );
-app.use( '/api/search', searchRouter );
-app.use( '/api/user', userRouter );
+app.use( '/bookmark', bookmarkRouter );
+app.use( '/search', searchRouter );
+app.use( '/user', userRouter );
 
 
 // 404 Error Handler 
