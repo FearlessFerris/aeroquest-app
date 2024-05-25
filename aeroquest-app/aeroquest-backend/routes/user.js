@@ -4,7 +4,7 @@
 // Dependencies 
 const express = require( 'express' );
 const router = express.Router();
-const axios = require( 'axios' );
+const apiClient = require( 'apiClient' );
 const bcrypt = require( 'bcrypt' );
 const db = require( '../db' );
 const ExpressError = require( '../ExpressError' );
@@ -14,7 +14,7 @@ const jwt = require( 'jsonwebtoken' );
 // Necessary Files 
 const { ACCESS_KEY, SECRET_KEY } = require( '../config' );
 const authorizationMiddleware = require( '../middleware/authorization' );
-
+const { apiClient } = require( '../../aeroquest-frontend/src/apiClient' );
 
 // Routes 
 

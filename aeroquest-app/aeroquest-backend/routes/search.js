@@ -4,12 +4,12 @@
 // Dependencies 
 const express = require( 'express' );
 const router = express.Router();
-const axios = require( 'axios' );
 
 
 // Necessary Files 
 const db = require( '../db' );
 const { SECRET_KEY, ACCESS_KEY } = require( '../config' );
+const { apiClient } = require( '../../aeroquest-frontend/src/apiClient' );
 
 
 // API Endpoints 
@@ -43,7 +43,7 @@ router.get( '/:type', async ( req, res, next ) => {
                 return res.status( 400 ).json({ error: 'Invalid Search Type' });
         }
 
-        const response = await axios.get( endpoint, {
+        const response = await apiClient.get( endpoint, {
             params: {
                 access_key: ACCESS_KEY,
                 search: searchTerm,
@@ -59,21 +59,6 @@ router.get( '/:type', async ( req, res, next ) => {
         res.status( 500 ).json({ error: 'Internal Server Error' });
     }
 });
-
-
-// router.get('/history/:userId', async (req, res) => {
-//     try {
-//       const { userId } = req.params;
-//       const result = await db.query(
-//         'SELECT * FROM searches WHERE user_id = $1 ORDER BY search_timestamp DESC',
-//         [userId]
-//       );
-//       res.status(200).json({ data: result.rows });
-//     } catch (error) {
-//       console.error('Error fetching search history:', error.message);
-//       res.status(500).json({ error: 'Internal Server Error' });
-//     }
-//   });
 
 
 module.exports = router;
