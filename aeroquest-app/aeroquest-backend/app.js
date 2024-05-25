@@ -39,12 +39,12 @@ app.use(( req, res, next ) => {
     next( err );
 });
 
-// app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
+app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
-// // Catch-all to send back the React index.html file for any unknown paths
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
-// });
+// Catch-all to send back the React index.html file for any unknown paths
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
+});
 
 // Global Error Handler 
 app.use(( err, req, res, next ) => {
