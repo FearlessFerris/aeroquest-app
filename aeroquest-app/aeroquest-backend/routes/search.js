@@ -9,7 +9,7 @@ const router = express.Router();
 // Necessary Files 
 const db = require( '../db' );
 const { SECRET_KEY, ACCESS_KEY } = require( '../config' );
-const { apiClient } = require( '../../aeroquest-frontend/src/apiClient' );
+const apiClient = require( '../apiClient' );
 
 
 // API Endpoints 

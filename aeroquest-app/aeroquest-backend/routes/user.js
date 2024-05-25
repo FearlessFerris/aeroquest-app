@@ -14,7 +14,7 @@ const jwt = require( 'jsonwebtoken' );
 // Necessary Files 
 const { ACCESS_KEY, SECRET_KEY } = require( '../config' );
 const authorizationMiddleware = require( '../middleware/authorization' );
-const { apiClient } = require( '../../aeroquest-frontend/src/apiClient' );
+const apiClient = require( '../apiClient' );
 
 // Routes 
 
