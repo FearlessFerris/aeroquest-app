@@ -8,23 +8,10 @@ require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 5000;
-const pool = require( '../aeroquest-backend/db' );
 
-// Middleware
-// const corsOptions = {
-//   origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-// };
-// app.use(cors( corsOptions ));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// app.use(express.static(path.join(__dirname, 'build')));
-
-// // Database connection string
-// const connectionString = process.env.DATABASE_URL;
-
-// // Create a new pool using the connection string
-// const pool = new Pool({ connectionString });
 
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`);
@@ -73,3 +60,4 @@ app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
 
+module.exports = app;
