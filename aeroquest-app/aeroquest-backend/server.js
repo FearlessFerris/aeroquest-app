@@ -40,6 +40,10 @@ app.get('/', (req, res) => {
   res.send('Hello, world!');
 });
 
+app.get('/health', (req, res) => {
+  res.send('OK');
+});
+
 // 404 Error Handler
 app.use((req, res, next) => {
   const err = new ExpressError('Not Found', 404);
