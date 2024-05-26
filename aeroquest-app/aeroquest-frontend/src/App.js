@@ -20,7 +20,7 @@ import './static/css/app.css';
 
 
 
-function App({ history }) {
+function App() {
 
   const [ isLoggedIn, setIsLoggedIn ] = useState( false );
   const [ userProfile, setUserProfile ] = useState( null );
