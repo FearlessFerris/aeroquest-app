@@ -240,7 +240,7 @@ function AirplanesInformationBlock({ data }) {
                         flexDirection: 'column',
                         justifyContent: 'flex-start',
                         width: '38rem',
-                        height: selectedBoxIndex === index ? 'auto' : '13rem',
+                        minHeight: '13rem',
                         margin: 'auto',
                         marginBottom: '1rem',
                         textAlign: 'center'
@@ -620,7 +620,7 @@ function AirplanesInformationBlock({ data }) {
                                 color: 'cyan',
                                 borderColor: 'cyan',
                                 fontWeight: 'bold',
-                                margin: '1rem',
+                                margin: '.5rem',
                                 '&:hover': {
                                     color: '#212121',
                                     borderColor: 'white',

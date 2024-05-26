@@ -3,7 +3,7 @@
 
 // Dependencies 
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Switch, withRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Switch, useNavigate, withRouter } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import apiClient from './apiClient';
 
@@ -20,7 +20,7 @@ import './static/css/app.css';
 
 
 
-function App({ history }) {
+function App() {
 
   const [ isLoggedIn, setIsLoggedIn ] = useState( false );
   const [ userProfile, setUserProfile ] = useState( null );
@@ -55,11 +55,9 @@ function App({ history }) {
     localStorage.removeItem('token');
     setIsLoggedIn(false);
     setUserProfile(null);
-    history.push( '/user/login' );
   }
 
   const clearSearchResults = () => {
-    console.log('Clearing Search Results');
     setSearchResults([]);
   }
   

@@ -272,8 +272,8 @@ function SearchBar({ searchResults, setSearchResults }) {
                         backgroundColor: selectedType === 'airlines' ? 'cyan' : '#212121',
                         borderColor: 'cyan',
                         fontWeight: 'bold',
-                        marginLeft: '1rem',
-                        marginRight: '1rem',
+                        marginLeft: '.5rem',
+                        marginRight: '.5rem',
                         marginBottom: '1rem',
                         '&:hover': {
                             color: '#212121',

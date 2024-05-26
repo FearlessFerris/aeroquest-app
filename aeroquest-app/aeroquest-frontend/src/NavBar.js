@@ -14,6 +14,7 @@ import { AppBar, Avatar, Box, Toolbar, Typography, Button } from '@mui/material'
 function NavBar({ isLoggedIn, handleLogout, clearSearchResults, userProfile }) {
 
     const navigate = useNavigate();
+
     const handleLogoutClick = () => {
         handleLogout();
         navigate( '/user/login' );

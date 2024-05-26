@@ -14,7 +14,6 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateField } from '@mui/x-date-pickers/DateField';
 import dayjs from 'dayjs';
-import EditForm from './EditForm';
 
 
 // Create User Component 
@@ -27,7 +26,7 @@ function CreateUser() {
         password: '',
         confirmPassword: '',
         email: '',
-        dob: dayjs('2024-5-5'),
+        dob: dayjs(''),
         imageUrl: '',
         imageUpload: ''
     }
@@ -56,8 +55,14 @@ function CreateUser() {
         }));
     };
 
+    const handleDateChange = (newValue) => {
+        setFormData((prevData) => ({
+            ...prevData,
+            dob: newValue,
+        }));
+    };
+
     const handleSubmit = async (e) => {
-        console.log(formData);
         e.preventDefault();
         const requiredFields = ['username', 'password', 'confirmPassword', 'email'];
         if (!requiredFields.every((field) => formData[field].trim() !== '')) {
@@ -291,14 +296,13 @@ function CreateUser() {
                 
                     <DateField
                         label="Date of Birth"
-                        format="M/D/YYYY"
-                        defaultValue={dayjs('2022-04-17')}
+                        format="MM/DD/YYYY"
                         shouldRespectLeadingZeros
                         InputLabelProps={{
                         style: { color: 'white' },
                         }}
                     value = { formData.dob }
-                    onChange = { handleChange }
+                    onChange = { handleDateChange }
                         sx={{
                             textAlign: 'center',
                             width: '350px',

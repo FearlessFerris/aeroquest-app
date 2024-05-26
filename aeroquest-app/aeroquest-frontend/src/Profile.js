@@ -62,7 +62,6 @@ function Profile() {
 
             const userId = getUserId();
             const response = await apiClient.put( `/user/update/${ userId }`, editedProfile, config );
-            console.log( 'Profile updated successfully:', response.data );
             const updatedProfile = response.data.user;
             setIsEditing( false ); 
             setProfile( updatedProfile ); 
