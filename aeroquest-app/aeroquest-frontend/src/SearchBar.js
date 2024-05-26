@@ -3,7 +3,7 @@
 
 // Dependencies 
 import React, { useState, useEffect } from 'react';
-import { Box, Button, InputLabel, TextField, Typography, Slider, Fade } from '@mui/material';
+import { Box, Button, Card, InputLabel, TextField, Typography, Slider, Fade } from '@mui/material';
 import apiClient from './apiClient';
 
 
@@ -22,7 +22,7 @@ function SearchBar({ searchResults, setSearchResults }) {
     const [ loading, setLoading ] = useState( false );
     const [ selectedType, setSelectedType ] = useState( 'airplanes' );
     const [ visibleSearchResults, setVisibleSearchResults ] = useState([]);
-    const [searchResultVisibility, setSearchResultVisibility] = useState({});
+    const [ searchResultVisibility, setSearchResultVisibility ] = useState([]);
 
     const handleChange = ( e ) => {
         setSearchTerm( e.target.value );
@@ -59,7 +59,7 @@ function SearchBar({ searchResults, setSearchResults }) {
                 setTimeout(() => {
                     setSearchResultVisibility((prevState) => ({ ...prevState, [index]: true }));
                     setVisibleSearchResults((prevResults) => [...prevResults, result]);
-                }, index * 700);
+                }, index * 500);
             });
             setSearchResultVisibility(updatedVisibility);
             setOffset((previousOffset) => previousOffset + limit);
@@ -81,14 +81,14 @@ function SearchBar({ searchResults, setSearchResults }) {
                     ...prevState,
                     [index]: false,
                 }))}
-            >
+                >
                 <div key={result.id}>
                     <p>{result.title}</p>
                 </div>
             </Fade>
         ));
     };
-
+    
     return (
         <div>
 
@@ -325,7 +325,9 @@ function SearchBar({ searchResults, setSearchResults }) {
                         Loading...
                     </Typography>
                 ) : (
-                    <div>{renderInformationBlock()}</div>
+                    <div>
+                        {renderInformationBlock()}
+                    </div>
                 )}
             </div>
             <div key={`${selectedType}-results`}>

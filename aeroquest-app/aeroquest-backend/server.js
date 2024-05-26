@@ -31,6 +31,15 @@ app.use('/bookmark', bookmarkRouter);
 app.use('/search', searchRouter);
 app.use('/user', userRouter);
 
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
+
+app.get('/', (req, res) => {
+  res.send('Hello, world!');
+});
+
 // 404 Error Handler
 app.use((req, res, next) => {
   const err = new ExpressError('Not Found', 404);

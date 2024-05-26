@@ -3,7 +3,7 @@
 
 // Dependencies 
 import React, { useState, useEffect } from 'react';
-import { Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography } from '@mui/material';
+import { Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Fade, Typography } from '@mui/material';
 import { AirplanemodeActive } from '@mui/icons-material';
 import apiClient from './apiClient';
 import { jwtDecode } from 'jwt-decode';
@@ -221,6 +221,11 @@ function AirplanesInformationBlock({ data }) {
     return (
         <div className="information-block">
             {data.map((item, index) => (
+                <Fade 
+                key = { index }
+                in = { true }
+                timeout = { 1000 }
+                >
                 <Card
                     key={index}
                     sx={{
@@ -240,11 +245,11 @@ function AirplanesInformationBlock({ data }) {
                         marginBottom: '1rem',
                         textAlign: 'center'
                     }}
-                >
+                    >
                     <CardContent >
                         <Typography
                             variant='h4'
-                        >
+                            >
                             <span style={{ fontSize: '2rem', color: 'white' }}>
                                 <AirplanemodeActive fontSize='large'></AirplanemodeActive>
                             </span>
@@ -255,14 +260,14 @@ function AirplanesInformationBlock({ data }) {
                                 display: 'flex',
                                 justifyContent: 'center',
                             }}
-                        >
+                            >
                             <Typography
                                 variant='h6'
                                 style={{
                                     color: 'white',
                                     marginRight: '1rem'
                                 }}
-                            >
+                                >
                                 Airplane ID:
                             </Typography>
                             <Typography
@@ -270,7 +275,7 @@ function AirplanesInformationBlock({ data }) {
                                 style={{
                                     color: 'cyan'
                                 }}
-                            >
+                                >
                                 {item.airplane_id}
                             </Typography>
                         </div>
@@ -279,7 +284,7 @@ function AirplanesInformationBlock({ data }) {
                                 display: 'flex',
                                 justifyContent: 'center'
                             }}
-                        >
+                            >
                             { item.plane_age && (
                                 <>
                                 <Typography
@@ -309,7 +314,7 @@ function AirplanesInformationBlock({ data }) {
                                         display: 'flex',
                                         justifyContent: 'center'
                                     }}
-                                >
+                                    >
                                 { item.plane_series && (
                                     <>
                                     <Typography
@@ -337,7 +342,7 @@ function AirplanesInformationBlock({ data }) {
                                         display: 'flex',
                                         justifyContent: 'center'
                                     }}
-                                >
+                                    >
                                 { item.plane_status && (
                                     <>
                                     <Typography
@@ -365,7 +370,7 @@ function AirplanesInformationBlock({ data }) {
                                         display: 'flex',
                                         justifyContent: 'center'
                                     }}
-                                >
+                                    >
                                     {item.engines_count && (
                                         <>
                                             <Typography
@@ -374,7 +379,7 @@ function AirplanesInformationBlock({ data }) {
                                                     color: 'white',
                                                     marginRight: '1rem'
                                                 }}
-                                            >
+                                                >
                                                 Engines Count:
                                             </Typography>
                                             <Typography
@@ -382,7 +387,7 @@ function AirplanesInformationBlock({ data }) {
                                                 style={{
                                                     color: 'cyan'
                                                 }}
-                                            >
+                                                >
                                                 {item.engines_count}
                                             </Typography>
                                         </>
@@ -393,7 +398,7 @@ function AirplanesInformationBlock({ data }) {
                                         display: 'flex',
                                         justifyContent: 'center'
                                     }}
-                                >
+                                    >
                                     {item.engines_type && (
                                         <>
                                             <Typography
@@ -402,7 +407,7 @@ function AirplanesInformationBlock({ data }) {
                                                     color: 'white',
                                                     marginRight: '1rem'
                                                 }}
-                                            >
+                                                >
                                                 Engines Type:
                                             </Typography>
                                             <Typography
@@ -421,7 +426,7 @@ function AirplanesInformationBlock({ data }) {
                                         display: 'flex',
                                         justifyContent: 'center'
                                     }}
-                                >
+                                    >
                                 { item.construction_number && (
                                     <>
                                     <Typography
@@ -449,7 +454,7 @@ function AirplanesInformationBlock({ data }) {
                                         display: 'flex',
                                         justifyContent: 'center'
                                     }}
-                                >
+                                    >
                                 { item.registration_number && (
                                     <>
                                     <Typography
@@ -477,7 +482,7 @@ function AirplanesInformationBlock({ data }) {
                                         display: 'flex',
                                         justifyContent: 'center'
                                     }}
-                                >
+                                    >
                                 { item.production_line && (
                                     <>
                                     <Typography
@@ -505,7 +510,7 @@ function AirplanesInformationBlock({ data }) {
                                         display: 'flex',
                                         justifyContent: 'center'
                                     }}
-                                >
+                                    >
                                 { item.delivery_date && (
                                     <>
                                     <Typography
@@ -533,7 +538,7 @@ function AirplanesInformationBlock({ data }) {
                                         display: 'flex',
                                         justifyContent: 'center'
                                     }}
-                                >
+                                    >
                                 { item.first_flight_date && (
                                     <>
                                     <Typography
@@ -561,7 +566,7 @@ function AirplanesInformationBlock({ data }) {
                                         display: 'flex',
                                         justifyContent: 'center'
                                     }}
-                                >
+                                    >
                                     {item.plane_owner && (
                                         <>
                                             <Typography
@@ -570,7 +575,7 @@ function AirplanesInformationBlock({ data }) {
                                                     color: 'white',
                                                     marginRight: '1rem'
                                                 }}
-                                            >
+                                                >
                                                 Plane Owner:
                                             </Typography>
                                             <Typography
@@ -578,7 +583,7 @@ function AirplanesInformationBlock({ data }) {
                                                 style={{
                                                     color: 'cyan'
                                                 }}
-                                            >
+                                                >
                                                 {item.plane_owner}
                                             </Typography>
                                         </>
@@ -603,7 +608,7 @@ function AirplanesInformationBlock({ data }) {
                                 },
                             }}
                             onClick={() => displayFullDetails(index)}
-                        >
+                            >
                             {selectedBoxIndex === index ? 'Hide Details' : 'Show Details'}
                         </Button>
                         <Button
@@ -624,7 +629,7 @@ function AirplanesInformationBlock({ data }) {
                                 },
                             }}
                             onClick={() => handleBookmarkClick(item)}
-                        >
+                            >
                             Bookmark
                         </Button>
                         <Button
@@ -644,11 +649,12 @@ function AirplanesInformationBlock({ data }) {
                                 },
                             }}
                             onClick={() => handleAddNoteClick(item)}
-                        >
+                            >
                             Add Note
                         </Button>
                     </CardContent>
                 </Card>
+            </Fade>
             ))}
 
             <Dialog
@@ -658,7 +664,7 @@ function AirplanesInformationBlock({ data }) {
                 maxWidth='md'
                 style={{
                 }}
-            >
+                >
                 <DialogTitle
                     style={{
                         backgroundColor: '#212121',

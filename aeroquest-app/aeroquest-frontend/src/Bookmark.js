@@ -62,7 +62,7 @@ function Bookmark() {
             bookmarks.forEach((_, index) => {
                 setTimeout(() => {
                     setVisibleBookmarks((prevVisible) => [...prevVisible, index]);
-                }, index * 300);
+                }, index * 500);
             });
         }
     }, [loading, bookmarks]);

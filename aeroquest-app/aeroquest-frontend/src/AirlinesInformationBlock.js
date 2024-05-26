@@ -3,7 +3,7 @@
 
 // Dependencies 
 import React, { useState, useEffect } from 'react';
-import { Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography } from '@mui/material';
+import { Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Fade, Typography } from '@mui/material';
 import AirlinesTwoTone from '@mui/icons-material/AirlinesTwoTone';
 import apiClient from './apiClient';
 import { jwtDecode } from 'jwt-decode';
@@ -221,6 +221,11 @@ function AirplanesInformationBlock({ data }) {
     return (
         <div className="information-block">
             {data.map((item, index) => (
+                <Fade 
+                key = { index }
+                in = { true }
+                timeout = { 1000 }
+                >
                 <Card
                     key={index}
                     sx={{
@@ -240,11 +245,11 @@ function AirplanesInformationBlock({ data }) {
                         marginBottom: '10px',
                         textAlign: 'center'
                     }}
-                >
+                    >
                     <CardContent >
                         <Typography
                             variant='h4'
-                        >
+                            >
                             <span style={{ fontSize: '2rem', color: 'white' }}>
                                 <AirlinesTwoTone fontSize='large'></AirlinesTwoTone>
                             </span>
@@ -255,14 +260,14 @@ function AirplanesInformationBlock({ data }) {
                                 display: 'flex',
                                 justifyContent: 'center',
                             }}
-                        >
+                            >
                             <Typography
                                 variant='h6'
                                 style={{
                                     color: 'white',
                                     marginRight: '1rem'
                                 }}
-                            >
+                                >
                                 Airline ID:
                             </Typography>
                             <Typography
@@ -279,7 +284,7 @@ function AirplanesInformationBlock({ data }) {
                                 display: 'flex',
                                 justifyContent: 'center'
                             }}
-                        >
+                            >
                         { item.icao_code && (
                             <>
                             <Typography
@@ -309,7 +314,7 @@ function AirplanesInformationBlock({ data }) {
                                         display: 'flex',
                                         justifyContent: 'center'
                                     }}
-                                >
+                                    >
                                     {item.iata_code && (
                                         <>
                                             <Typography
@@ -318,7 +323,7 @@ function AirplanesInformationBlock({ data }) {
                                                     color: 'white',
                                                     marginRight: '1rem'
                                                 }}
-                                            >
+                                                >
                                                 IATA Code:
                                             </Typography>
                                             <Typography
@@ -326,7 +331,7 @@ function AirplanesInformationBlock({ data }) {
                                                 sx={{
                                                     color: 'cyan'
                                                 }}
-                                            >
+                                                >
                                                 {item.iata_code}
                                             </Typography>
                                         </>
@@ -337,7 +342,7 @@ function AirplanesInformationBlock({ data }) {
                                         display: 'flex',
                                         justifyContent: 'center'
                                     }}
-                                >
+                                    >
                                     {item.status && (
                                         <>
                                             <Typography
@@ -346,7 +351,7 @@ function AirplanesInformationBlock({ data }) {
                                                     color: 'white',
                                                     marginRight: '1rem'
                                                 }}
-                                            >
+                                                >
                                                 Status:
                                             </Typography>
                                             <Typography
@@ -354,7 +359,7 @@ function AirplanesInformationBlock({ data }) {
                                                 sx={{
                                                     color: 'cyan'
                                                 }}
-                                            >
+                                                >
                                                 {item.status}
                                             </Typography>
                                         </>
@@ -365,7 +370,7 @@ function AirplanesInformationBlock({ data }) {
                                         display: 'flex',
                                         justifyContent: 'center'
                                     }}
-                                >
+                                    >
                                     {item.callsign && (
                                         <>
                                             <Typography
@@ -374,7 +379,7 @@ function AirplanesInformationBlock({ data }) {
                                                     color: 'white',
                                                     marginRight: '1rem'
                                                 }}
-                                            >
+                                                >
                                                 Callsign:
                                             </Typography>
                                             <Typography
@@ -382,7 +387,7 @@ function AirplanesInformationBlock({ data }) {
                                                 sx={{
                                                     color: 'cyan'
                                                 }}
-                                            >
+                                                >
                                                 {item.callsign}
                                             </Typography>
                                         </>
@@ -393,7 +398,7 @@ function AirplanesInformationBlock({ data }) {
                                         display: 'flex',
                                         justifyContent: 'center'
                                     }}
-                                >
+                                    >
                                     {item.fleet_average_age && (
                                         <>
                                             <Typography
@@ -402,7 +407,7 @@ function AirplanesInformationBlock({ data }) {
                                                     color: 'white',
                                                     marginRight: '1rem'
                                                 }}
-                                            >
+                                                >
                                                 Fleet Average Age:
                                             </Typography>
                                             <Typography
@@ -410,7 +415,7 @@ function AirplanesInformationBlock({ data }) {
                                                 sx={{
                                                     color: 'cyan'
                                                 }}
-                                            >
+                                                >
                                                 {item.fleet_average_age}
                                             </Typography>
                                         </>
@@ -421,7 +426,7 @@ function AirplanesInformationBlock({ data }) {
                                         display: 'flex',
                                         justifyContent: 'center'
                                     }}
-                                >
+                                    >
                                     {item.airline_name && (
                                         <>
                                             <Typography
@@ -430,7 +435,7 @@ function AirplanesInformationBlock({ data }) {
                                                     color: 'white',
                                                     marginRight: '1rem'
                                                 }}
-                                            >
+                                                >
                                                 Airline Name:
                                             </Typography>
                                             <Typography
@@ -438,7 +443,7 @@ function AirplanesInformationBlock({ data }) {
                                                 sx={{
                                                     color: 'cyan'
                                                 }}
-                                            >
+                                                >
                                                 {item.airline_name}
                                             </Typography>
                                         </>
@@ -458,7 +463,7 @@ function AirplanesInformationBlock({ data }) {
                                                     color: 'white',
                                                     marginRight: '1rem'
                                                 }}
-                                            >
+                                                >
                                                 Country Name:
                                             </Typography>
                                             <Typography
@@ -466,7 +471,7 @@ function AirplanesInformationBlock({ data }) {
                                                 sx={{
                                                     color: 'cyan'
                                                 }}
-                                            >
+                                                >
                                                 {item.country_name}
                                             </Typography>
                                         </>
@@ -491,7 +496,7 @@ function AirplanesInformationBlock({ data }) {
                                 },
                             }}
                             onClick={() => displayFullDetails(index)}
-                        >
+                            >
                             {selectedBoxIndex === index ? 'Hide Details' : 'Show Details'}
                         </Button>
                         <Button
@@ -512,7 +517,7 @@ function AirplanesInformationBlock({ data }) {
                                 },
                             }}
                             onClick={() => handleBookmarkClick(item)}
-                        >
+                            >
                             Bookmark
                         </Button>
                         <Button
@@ -532,11 +537,12 @@ function AirplanesInformationBlock({ data }) {
                                 },
                             }}
                             onClick={() => handleAddNoteClick(item)}
-                        >
+                            >
                             Add Note
                         </Button>
                     </CardContent>
                 </Card>
+            </Fade>
             ))}
 
             <Dialog
@@ -546,7 +552,7 @@ function AirplanesInformationBlock({ data }) {
                 maxWidth='md'
                 style={{
                 }}
-            >
+                >
                 <DialogTitle
                     style={{
                         backgroundColor: '#212121',
