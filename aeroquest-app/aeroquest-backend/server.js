@@ -21,6 +21,11 @@ const connectionString = process.env.DATABASE_URL;
 // Create a new pool using the connection string
 const pool = new Pool({ connectionString });
 
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
+
 // Routers
 const bookmarkRouter = require('./routes/bookmark' );
 const searchRouter = require('./routes/search' );
@@ -31,10 +36,6 @@ app.use('/bookmark', bookmarkRouter);
 app.use('/search', searchRouter);
 app.use('/user', userRouter);
 
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.url}`);
-  next();
-});
 
 app.get('/', (req, res) => {
   res.send('Hello, world!');
