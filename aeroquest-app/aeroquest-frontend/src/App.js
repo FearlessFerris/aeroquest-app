@@ -3,7 +3,7 @@
 
 // Dependencies 
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Switch, withRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Switch, useNavigate, withRouter } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import apiClient from './apiClient';
 
@@ -26,6 +26,7 @@ function App({ history }) {
   const [ userProfile, setUserProfile ] = useState( null );
   const [ decodedToken, setDecodedToken ] = useState( null );
   const [ searchResults, setSearchResults ] = useState([]);
+  const navigate = useNavigate();
 
   useEffect( () => {
     localStorage.removeItem( 'token' );
@@ -63,7 +64,8 @@ function App({ history }) {
     localStorage.removeItem( 'token' );
     setIsLoggedIn( false );
     setUserProfile( null );
-    history.push( '/' );
+    // history.push( '/' );
+    navigate( '/user/login' );
   }
 
   const clearSearchResults = () => {
