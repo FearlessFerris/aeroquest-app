@@ -64,7 +64,6 @@ function App() {
     localStorage.removeItem( 'token' );
     setIsLoggedIn( false );
     setUserProfile( null );
-    // history.push( '/' );
     navigate( '/user/login' );
   }
 
