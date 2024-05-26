@@ -16,7 +16,7 @@ function NavBar({ isLoggedIn, handleLogout, clearSearchResults, userProfile }) {
     const navigate = useNavigate();
     const handleLogoutClick = () => {
         handleLogout();
-        navigate( '/' );
+        navigate( '/user/login' );
     }
 
     const handleHomeClick = () => {
@@ -104,7 +104,7 @@ function NavBar({ isLoggedIn, handleLogout, clearSearchResults, userProfile }) {
 
                     <Typography
                     component = { Link }
-                    to = '/login'
+                    to = '/user/login'
                     color = 'white'
                     sx = {{
                         color: 'white', 
