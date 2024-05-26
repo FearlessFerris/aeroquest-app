@@ -74,7 +74,7 @@ function CreateUser() {
         }
     
         try {
-            const response = await apiClient.post( '/users/create', formDataToSend );
+            const response = await apiClient.post( '/user/create', formDataToSend );
             const successMessage = `Congratulations ${formData.username}, you have successfully created an account!`
             navigate('/', { state: { message: successMessage }});
             setFormData(initialState);
