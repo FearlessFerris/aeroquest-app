@@ -20,11 +20,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // app.use(express.static(path.join(__dirname, 'build')));
 
-// Database connection string
-const connectionString = process.env.DATABASE_URL;
+// // Database connection string
+// const connectionString = process.env.DATABASE_URL;
 
-// Create a new pool using the connection string
-const pool = new Pool({ connectionString });
+// // Create a new pool using the connection string
+// const pool = new Pool({ connectionString });
 
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`);
