@@ -56,7 +56,7 @@ function App() {
     localStorage.removeItem('token');
     setIsLoggedIn(false);
     setUserProfile(null);
-    navigate('/user/login');
+    navigate('/');
   }
 
   const clearSearchResults = () => {
