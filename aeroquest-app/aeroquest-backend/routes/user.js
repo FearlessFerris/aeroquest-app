@@ -5,7 +5,7 @@
 const express = require( 'express' );
 const router = express.Router();
 const bcrypt = require( 'bcrypt' );
-const pool = require( '../pool' );
+const pool = require( '../db' );
 const ExpressError = require( '../ExpressError' );
 const jwt = require( 'jsonwebtoken' );
 
