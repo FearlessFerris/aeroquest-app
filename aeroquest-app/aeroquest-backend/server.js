@@ -17,6 +17,7 @@ const corsOptions = {
 app.use(cors( corsOptions ));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'build')));
 
 // Database connection string
 const connectionString = process.env.DATABASE_URL;
@@ -46,6 +47,10 @@ app.get('/', (req, res) => {
 
 app.get('/health', (req, res) => {
   res.send('OK');
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 // 404 Error Handler
