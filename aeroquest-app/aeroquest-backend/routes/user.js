@@ -5,7 +5,7 @@
 const express = require( 'express' );
 const router = express.Router();
 const bcrypt = require( 'bcrypt' );
-const db = require( '../db' );
+const pool = require( '../pool' );
 const ExpressError = require( '../ExpressError' );
 const jwt = require( 'jsonwebtoken' );
 
@@ -13,7 +13,7 @@ const jwt = require( 'jsonwebtoken' );
 // Necessary Files 
 const { ACCESS_KEY, SECRET_KEY } = require( '../config' );
 const authorizationMiddleware = require( '../middleware/authorization' );
-const apiClient = require( '../apiClient' );
+
 
 // Routes 
 
@@ -27,7 +27,7 @@ router.post( '/login', async ( req, res, next ) => {
         }
 
         const query = `SELECT id, username, password, image_url FROM users WHERE username = $1`;
-        const result = await db.query( query, [ username ] );
+        const result = await pool.query( query, [ username ] );
         console.log( `Result:`, result );
 
         if( result.rows.length === 0 ){
@@ -91,7 +91,7 @@ router.post( '/create', async ( req, res, next ) => {
         console.log('Database insertion query:', query);
         console.log('Database insertion values:', values);
         
-        const result = await db.query(query, values);
+        const result = await pool.query(query, values);
         if (result.rowCount > 0) {
             console.log('User created successfully:', result.rows[0]);
             res.status(201).json({
@@ -121,7 +121,7 @@ router.get( '/profile/:id', authorizationMiddleware, async ( req, res, next ) =>
         console.log( ACCESS_KEY );
         const userId = req.user.id;
         const query = `SELECT id, username, email, dob, image_url, image_upload FROM users WHERE id = $1`;
-        const result = await db.query(query, [userId]);
+        const result = await pool.query(query, [userId]);
         if( result.rows.length === 0 ){
             return res.status( 404 ).json({ message: 'User Not Found!' });
         }
@@ -146,7 +146,7 @@ router.put( '/update/:userId', async ( req, res, next ) => {
             return res.status( 400 ).json({ message: 'Username and email are required fields.' });
         }
         const query = `SELECT * FROM users WHERE id = $1`;
-        const user = await db.query( query, [ userId ] );
+        const user = await pool.query( query, [ userId ] );
 
         if ( !user ) {
             return res.status(404).json({ message: 'User not found.' });
@@ -169,7 +169,7 @@ router.put( '/update/:userId', async ( req, res, next ) => {
             foundUser.password = await bcrypt.hash(password, 10); 
         }
 
-        await db.query( 'UPDATE users SET username = $1, password = $2, email = $3, dob = $4, image_url = $5, image_upload = $6 WHERE id = $7', 
+        await pool.query( 'UPDATE users SET username = $1, password = $2, email = $3, dob = $4, image_url = $5, image_upload = $6 WHERE id = $7', 
         [foundUser.username, foundUser.password, foundUser.email, foundUser.dob, foundUser.imageUrl, foundUser.imageUpload, userId ]);
 
         res.status(200).json({ message: 'Profile updated successfully.', user: foundUser });

@@ -4,7 +4,7 @@
 // Dependencies 
 const express = require( 'express' );
 const router = express.Router();
-const db = require( '../db' );
+const pool = require( '../pool' );
 
 // Necessary Files
 const { SECRET_KEY, ACCESS_KEY } = require( '../config' ); 
@@ -24,7 +24,7 @@ router.post( '/add', authorizationMiddleware, async ( req, res, next ) => {
         VALUES ($1, $2, $3, $4 )
         RETURNING *;
         `;
-        const result = await db.query( query, [ userId, endpoint, responseData, notes ]);
+        const result = await pool.query( query, [ userId, endpoint, responseData, notes ]);
         console.log( 'Result:', result );
         const bookmark = result.rows[0];
         console.log( 'Added Bookmark:', bookmark );
@@ -42,7 +42,7 @@ router.get('/list/:userId', authorizationMiddleware, async (req, res) => {
     try {
       const userId = req.params.userId;
       const query = 'SELECT * FROM bookmarks WHERE user_id = $1';
-      const result = await db.query(query, [userId]);
+      const result = await pool.query(query, [userId]);
       const bookmarks = result.rows;
       if( bookmarks.length === 0 ){
         return res.status( 200 ).json({ message: `You currently don't have any bookmarks!`, bookmarks });
@@ -61,7 +61,7 @@ router.delete( '/remove/:bookmarkId', authorizationMiddleware, async ( req, res 
       const userId = req.user.id;
       const { bookmarkId } = req.params;
       const query = 'DELETE FROM bookmarks WHERE id = $1 AND user_id = $2 RETURNING *';
-      const result = await db.query(query, [bookmarkId, userId]);
+      const result = await pool.query(query, [bookmarkId, userId]);
       const bookmark = result.rows[0];
       if (!bookmark) {
         return res.status(404).json({ message: 'Bookmark not found' });
@@ -81,12 +81,12 @@ router.put( '/modify/:bookmarkId', authorizationMiddleware, async ( req, res ) =
       const { bookmarkId } = req.params;
       const { notes } = req.body;
       const query = 'UPDATE bookmarks SET notes = $1 WHERE id = $2 AND user_id = $3 RETURNING *';
-      const result = await db.query(query, [notes, bookmarkId, userId]);
-      const updatedBookmark = result.rows[0];
-      if (!updatedBookmark) {
+      const result = await pool.query(query, [notes, bookmarkId, userId]);
+      const updatepoolookmark = result.rows[0];
+      if (!updatepoolookmark) {
         return res.status(404).json({ message: 'Bookmark not found or you do not have permission to modify it' });
       }
-      res.status(200).json({ message: 'Bookmark updated successfully', bookmark: updatedBookmark });
+      res.status(200).json({ message: 'Bookmark updated successfully', bookmark: updatepoolookmark });
     } catch (error) {
       console.error('Error modifying bookmark:', error);
       res.status(500).json({ message: 'Internal server error' });

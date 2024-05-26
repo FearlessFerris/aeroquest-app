@@ -7,7 +7,7 @@ const router = express.Router();
 
 
 // Necessary Files 
-const db = require( '../db' );
+const pool = require( '../db' );
 const { SECRET_KEY, ACCESS_KEY } = require( '../config' );
 const apiClient = require( '../apiClient' );
 

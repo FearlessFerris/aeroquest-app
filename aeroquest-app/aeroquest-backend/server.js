@@ -3,12 +3,12 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const { Pool } = require('pg');
 const ExpressError = require('./ExpressError');
 require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 5000;
+const pool = require( '../aeroquest-backend/db' );
 
 // Middleware
 // const corsOptions = {
@@ -72,3 +72,6 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
+
+
+module.exports = pool;
