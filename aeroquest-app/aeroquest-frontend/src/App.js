@@ -3,7 +3,7 @@
 
 // Dependencies 
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Switch, withRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Switch, useNavigate, withRouter } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import apiClient from './apiClient';
 
@@ -20,7 +20,7 @@ import './static/css/app.css';
 
 
 
-function App({ history }) {
+function App() {
 
   const [ isLoggedIn, setIsLoggedIn ] = useState( false );
   const [ userProfile, setUserProfile ] = useState( null );
@@ -28,47 +28,39 @@ function App({ history }) {
   const [ searchResults, setSearchResults ] = useState([]);
   const navigate = useNavigate();
 
-  useEffect( () => {
-    localStorage.removeItem( 'token' );
-    console.log( localStorage );
-    setIsLoggedIn( false );
-    setUserProfile( null );
-  }, []);
-  
-  useEffect( () => {
-    const token = localStorage.getItem( 'token' );
-    if( token ){
-      const decodedToken = jwtDecode( token );
-      setDecodedToken( decodedToken );
-      setIsLoggedIn( true );
-      fetchUserProfile( token );
-    }
-    else{
-      setIsLoggedIn( false );
-      setUserProfile( null )
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      setDecodedToken(decodedToken);
+      setIsLoggedIn(true);
+      fetchUserProfile(token);
+    } else {
+      setIsLoggedIn(false);
+      setUserProfile(null);
     }
   }, []);
 
-  const fetchUserProfile = async ( token ) => {
+  const fetchUserProfile = async (token) => {
     try {
-      const response = await apiClient.get( `/user/profile/${ decodedToken.id }`, {
-        headers: { Authorization: `Bearer ${ token }` },
+      const response = await apiClient.get(`/user/profile/${decodedToken.id}`, {
+        headers: { Authorization: `Bearer ${token}` },
       });
-      setUserProfile( response.data.data ); 
+      setUserProfile(response.data.data);
     } catch (error) {
       console.error('Error fetching user profile:', error);
     }
   };
 
   const handleLogout = () => {
-    localStorage.removeItem( 'token' );
-    setIsLoggedIn( false );
-    setUserProfile( null );
-    history.push( '/user/login' );
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+    setUserProfile(null);
+    navigate('/user/login');
   }
 
   const clearSearchResults = () => {
-    console.log( 'Clearing Search Results' )
+    console.log('Clearing Search Results');
     setSearchResults([]);
   }
   
