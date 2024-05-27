@@ -18,7 +18,7 @@ import { Bookmarks } from '@mui/icons-material';
 function History(){
 
     const [ searches, setSearches ] = useState([]);
-    const [ visableSearches, setVisableSearches ] = useState([]);
+    const [ visibleSearches, setVisibleSearches ] = useState([]);
     const [ loading, setLoading ] = useState( true );
 
     const getUserId = () => {
@@ -60,13 +60,11 @@ function History(){
         if ( !loading && searches.length > 0 ){
             searches.forEach(( _, index ) => {
                 setTimeout( () => {
-                    setVisableSearches(( prevVisible ) => [ ...prevVisible, index ]);
+                    setVisibleSearches(( prevVisible ) => [ ...prevVisible, index ]);
                 }, index * 500 );
             });
         }
     }, [ loading, searches ]);
-
-    console.log( searches );
 
     return(
         <div 
@@ -110,7 +108,7 @@ function History(){
             </Typography>
             ):(
                 searches.map(( item, index ) => (
-                    <Fade in = { true } timeout = { 1000 } key = { index }>
+                    <Fade in = {visibleSearches.includes(( index ))} timeout = { 1000 } key = { index }>
                         { item.search_term && (
                             <Card
                             key={index}
