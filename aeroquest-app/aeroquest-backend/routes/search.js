@@ -62,7 +62,7 @@ router.get( '/:type', async ( req, res, next ) => {
 });
 
 
-// Search History 
+// Add Item to Search History 
 router.post('/add', authorizationMiddleware, async (req, res, next) => {
     try {
         const { searchTerm, userId: bodyUserId } = req.body;
@@ -97,6 +97,20 @@ router.post('/add', authorizationMiddleware, async (req, res, next) => {
 });
 
 
+// Get Search History of User 
+router.get( '/history/:userId', authorizationMiddleware, async ( req, res, next ) => {
+    try{
+        const { userId } = req.params;
+        const query = `SELECT * FROM search_history WHERE user_id = $1`;
+        const result = await pool.query( query, [ userId ]);
+        const searches = result.rows;
+        res.status( 200 ).json({ message: 'Successfully retrieved user history!', searches });
+    }
+    catch( error ){
+        console.error( 'Error fetching user search history:', error.message );
+        return res.status( 500 ).json({ error: 'Internal Server Error' });
+    }
+})
 
 
 module.exports = router;

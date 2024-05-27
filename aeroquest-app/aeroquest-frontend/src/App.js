@@ -16,6 +16,7 @@ import Login from './Login';
 import NavBar from './NavBar';
 import Search from './Search';
 import Profile from './Profile';
+import History from './History';
 import './static/css/app.css';
 
 
@@ -72,9 +73,10 @@ function App() {
         />
           <Routes> 
             <Route path = '/' element = { <Home /> } />
-            <Route path = '/search' element = { <Search /> } /> 
+            <Route path = '/search' element = { <Search /> } />
             { isLoggedIn ? (
               <>
+                <Route path = '/search/history' element = { <History /> } />  
                 <Route path = '/user/profile' element = { <Profile /> } />
                 <Route path = '/user/bookmark' element = { <Bookmark /> } /> 
               </>

@@ -74,12 +74,14 @@ function Bookmark() {
     };
 
     const handleEditNotes = (item) => {
-        setItemInfo({
+        setItemInfo((prevInfo) => ({
+            ...prevInfo,
             chosenItem: item,
             toggleNotes: true,
             notes: item.notes || ''
-        });
+        }));
     };
+    
 
     const handleSaveNotes = async () => {
         try {

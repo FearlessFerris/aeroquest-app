@@ -71,6 +71,23 @@ function NavBar({ isLoggedIn, handleLogout, clearSearchResults, userProfile }) {
 
                     { isLoggedIn ? (
                     <>
+
+                    <Typography 
+                    component = { Link } 
+                    to = '/search/history' 
+                    color = 'white'
+                    sx = {{ 
+                        color: 'white', 
+                        textDecoration: 'none',
+                        fontSize: '1.8rem', 
+                        '&:hover': {
+                            color: 'black',
+                            backgroundColor: '#006064',
+                            borderRadius: '3px'
+                        },
+                    }}>
+                    History </Typography>
+
                     <Typography
                     component = { Link }
                     to = '/user/profile'
