@@ -158,11 +158,11 @@ function NavBar({ isLoggedIn, handleLogout, clearSearchResults, userProfile }) {
                 )}
 
                 { userProfile && userProfile.image_url && (
-                        <Avatar
+                    <Avatar
                         src = { userProfile.image_url || '' }
                         alt = { userProfile.username }
-                        />
-                    )}
+                    />
+                )}
                 </Box>
             </AppBar>
             </div>

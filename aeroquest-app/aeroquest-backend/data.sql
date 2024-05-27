@@ -19,11 +19,13 @@ CREATE TABLE users (
 );
 
 
--- Create Search Table 
-CREATE TABLE searches (
+-- Create Search Table
+CREATE TABLE search_history (
     id SERIAL PRIMARY KEY,
-    search_term VARCHAR( 255 ) NOT NULL, 
-    search_timestamp TIMESTAMP NOT NULL
+    search_term VARCHAR(255) NOT NULL,
+    search_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    user_id INT, 
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE 
 );
 
 

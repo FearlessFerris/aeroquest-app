@@ -4,12 +4,14 @@
 // Dependencies 
 const express = require( 'express' );
 const router = express.Router();
+const ExpressError = require( '../ExpressError' );
 
 
 // Necessary Files 
 const pool = require( '../db' );
 const { SECRET_KEY, ACCESS_KEY } = require( '../config' );
 const apiClient = require( '../apiClient' );
+const authorizationMiddleware = require('../middleware/authorization');
 
 
 // API Endpoints 
@@ -26,7 +28,6 @@ router.get( '/:type', async ( req, res, next ) => {
     try{
         const { type } = req.params;
         const { searchTerm, offset = 0, limit = 10 } = req.query;
-        console.log( searchTerm, offset, limit );
         let endpoint = '';
 
         switch( type ){
@@ -59,6 +60,38 @@ router.get( '/:type', async ( req, res, next ) => {
         res.status( 500 ).json({ error: 'Internal Server Error' });
     }
 });
+
+
+// Search History 
+router.post( '/add', authorizationMiddleware, async ( req, res, next ) => {
+    try{ 
+        const { searchTerm, userId } = req.body;
+        let query = '';
+        let values = [ searchTerm ];
+
+        if ( userId ) {
+            query = `INSERT INTO search_history ( search_term, user_id ) VALUES ( $1, $2 ) RETURNING *`;
+            values.push( userId );
+        }
+        else {
+            query = `INSERT INTO search_history ( search_term, user_id ) VALUES ( $1 ) RETURNING *`;
+        }
+
+        const result = await pool.query( query, values );
+
+        if( result.rows.length > 0 ){
+            console.log( result.rows[0] );
+            return res.status( 200 ).json({ message: `${ searchTerm } was added to the search history!`, data: searchTerm });
+        }
+        else{
+            throw new ExpressError( 'Failed to add search to search history' );
+        }
+    }
+    catch( error ){
+        console.error( 'Error adding search to search history!!!', error.message );
+        return res.status( 500 ).json({ error: `Internal Server Error` });
+    }
+})
 
 
 module.exports = router;

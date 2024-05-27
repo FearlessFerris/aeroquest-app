@@ -5,6 +5,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Button, Card, InputLabel, TextField, Typography, Slider, Fade } from '@mui/material';
 import apiClient from './apiClient';
+import { jwtDecode } from 'jwt-decode';
 
 
 // Components & Necessary Files 
@@ -24,6 +25,12 @@ function SearchBar({ searchResults, setSearchResults }) {
     const [ visibleSearchResults, setVisibleSearchResults ] = useState([]);
     const [ searchResultVisibility, setSearchResultVisibility ] = useState([]);
 
+    const getUserId = () => {
+        const token = localStorage.getItem('token');
+        const userId = jwtDecode(token).id;
+        return { userId, token };
+    }
+
     const handleChange = ( e ) => {
         setSearchTerm( e.target.value );
     }; 
@@ -40,10 +47,27 @@ function SearchBar({ searchResults, setSearchResults }) {
 
     const handleSubmit = async ( e ) => {
         e.preventDefault();
+        await sendSearchHistory( searchTerm );
         setOffset( 0 );
         setSearchResults([]);
         fetchResults();
     };
+
+    const sendSearchHistory = async ( searchTerm ) => {
+        try{
+            const { userId, token } = getUserId();
+            const requestBody = userId? { searchTerm, userId } : { searchTerm }; 
+            const response = await apiClient.post( `/search/add`, requestBody, {
+                headers: {
+                    Authorization: `Bearer ${ token }`
+                }
+            });
+            console.log( response.data );
+        }
+        catch( error ){
+            console.error( 'Error adding your search to search history!', error );
+        }
+    }
 
     const fetchResults = async () => {
         try {
@@ -91,7 +115,6 @@ function SearchBar({ searchResults, setSearchResults }) {
     
     return (
         <div>
-
         <div className = 'searchbar-container'
             style={{
                 display: 'flex',

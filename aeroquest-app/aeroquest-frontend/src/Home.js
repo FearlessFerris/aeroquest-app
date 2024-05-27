@@ -56,7 +56,7 @@ function Home() {
             <div
               style={{
                 display: 'flex',
-                margin: '1rem',
+                margin: '1rem'
               }}
             >
               <Box
@@ -76,7 +76,15 @@ function Home() {
                     marginBottom: '3rem',
                   }}
                 >
-                  Welcome to Aeroquest
+                  Welcome to&nbsp;
+                  <span
+                    style = {{
+                      color: 'cyan',
+                      fontStyle: 'italic'
+                    }}
+                  > 
+                  Aeroquest
+                  </span>
                 </Typography>
                 <Typography
                   variant='h5'

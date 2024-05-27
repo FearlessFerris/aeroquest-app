@@ -25,7 +25,7 @@ function Search() {
 
     return(
         <div>
-            <SearchBar searchResults = { searchResults } setSearchResults = { setSearchResults }/>
+            <SearchBar searchResults = { searchResults } setSearchResults = { setSearchResults } />
         </div>
     )
 }

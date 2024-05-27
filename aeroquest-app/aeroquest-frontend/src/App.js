@@ -73,10 +73,17 @@ function App() {
           <Routes> 
             <Route path = '/' element = { <Home /> } />
             <Route path = '/search' element = { <Search /> } /> 
-            <Route path = '/user/profile' element = { <Profile /> } />
-            <Route path = '/user/login' element = { <Login  setIsLoggedIn = { setIsLoggedIn } setUserProfile = { setUserProfile } /> } /> 
-            <Route path = '/user/create' element = { <CreateUser /> } />
-            <Route path = '/user/bookmark' element = { <Bookmark /> } /> 
+            { isLoggedIn ? (
+              <>
+                <Route path = '/user/profile' element = { <Profile /> } />
+                <Route path = '/user/bookmark' element = { <Bookmark /> } /> 
+              </>
+            ):(
+              <>
+                <Route path = '/user/login' element = { <Login  setIsLoggedIn = { setIsLoggedIn } setUserProfile = { setUserProfile } /> } /> 
+                <Route path = '/user/create' element = { <CreateUser /> } />
+              </>
+            )}
           </Routes>
       </BrowserRouter>
     </div>
