@@ -63,35 +63,40 @@ router.get( '/:type', async ( req, res, next ) => {
 
 
 // Search History 
-router.post( '/add', authorizationMiddleware, async ( req, res, next ) => {
-    try{ 
-        const { searchTerm, userId } = req.body;
+router.post('/add', authorizationMiddleware, async (req, res, next) => {
+    try {
+        const { searchTerm, userId: bodyUserId } = req.body;
+        const tokenUserId = req.user?.id;
+
+        console.log('Request body:', req.body);
+        console.log('User from token:', req.user);
+
         let query = '';
-        let values = [ searchTerm ];
+        let values = [searchTerm];
+        const userId = tokenUserId || bodyUserId;
+        
+        if (userId) {
+            query = `INSERT INTO search_history (search_term, user_id) VALUES ($1, $2) RETURNING *`;
+            values.push(userId);
+        } else {
+            query = `INSERT INTO search_history (search_term) VALUES ($1) RETURNING *`;
+        }
 
-        if ( userId ) {
-            query = `INSERT INTO search_history ( search_term, user_id ) VALUES ( $1, $2 ) RETURNING *`;
-            values.push( userId );
-        }
-        else {
-            query = `INSERT INTO search_history ( search_term, user_id ) VALUES ( $1 ) RETURNING *`;
-        }
+        const result = await pool.query(query, values);
 
-        const result = await pool.query( query, values );
-
-        if( result.rows.length > 0 ){
-            console.log( result.rows[0] );
-            return res.status( 200 ).json({ message: `${ searchTerm } was added to the search history!`, data: searchTerm });
+        if (result.rows.length > 0) {
+            console.log('Search term added to history:', result.rows[0]);
+            return res.status(200).json({ message: `${searchTerm} was added to the search history!`, data: result.rows[0] });
+        } else {
+            throw new Error('Failed to add search to search history');
         }
-        else{
-            throw new ExpressError( 'Failed to add search to search history' );
-        }
+    } catch (error) {
+        console.error('Error adding search to search history:', error.message);
+        return res.status(500).json({ error: 'Internal Server Error' });
     }
-    catch( error ){
-        console.error( 'Error adding search to search history!!!', error.message );
-        return res.status( 500 ).json({ error: `Internal Server Error` });
-    }
-})
+});
+
+
 
 
 module.exports = router;

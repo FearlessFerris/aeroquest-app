@@ -27,9 +27,18 @@ function SearchBar({ searchResults, setSearchResults }) {
 
     const getUserId = () => {
         const token = localStorage.getItem('token');
-        const userId = jwtDecode(token).id;
-        return { userId, token };
-    }
+        if (token) {
+            try {
+                const decoded = jwtDecode(token);
+                console.log( decoded );
+                return { userId: decoded.id, token };
+            } catch (error) {
+                console.error('Invalid token:', error);
+                return { userId: null, token: null };
+            }
+        }
+        return { userId: null, token: null };
+    };
 
     const handleChange = ( e ) => {
         setSearchTerm( e.target.value );
@@ -53,21 +62,25 @@ function SearchBar({ searchResults, setSearchResults }) {
         fetchResults();
     };
 
-    const sendSearchHistory = async ( searchTerm ) => {
-        try{
-            const { userId, token } = getUserId();
-            const requestBody = userId? { searchTerm, userId } : { searchTerm }; 
-            const response = await apiClient.post( `/search/add`, requestBody, {
-                headers: {
-                    Authorization: `Bearer ${ token }`
-                }
-            });
-            console.log( response.data );
+    const sendSearchHistory = async (searchTerm) => {
+        try {
+            const token = localStorage.getItem('token');
+            let requestBody = { searchTerm };
+            let headers = {};
+    
+            if (token) {
+                const userId = jwtDecode(token).id;
+                requestBody.userId = userId;
+                headers.Authorization = `Bearer ${token}`;
+            }
+    
+            const response = await apiClient.post('/search/add', requestBody, { headers });
+            console.log(response.data);
+        } catch (error) {
+            console.error('Error adding your search to search history!', error);
         }
-        catch( error ){
-            console.error( 'Error adding your search to search history!', error );
-        }
-    }
+    };
+    
 
     const fetchResults = async () => {
         try {
