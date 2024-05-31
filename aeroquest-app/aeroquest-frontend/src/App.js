@@ -32,18 +32,26 @@ function App() {
     const token = localStorage.getItem('token');
     if (token) {
       const decodedToken = jwtDecode(token);
-      setDecodedToken(decodedToken);
-      setIsLoggedIn(true);
-      fetchUserProfile(token);
-    } else {
-      setIsLoggedIn(false);
-      setUserProfile(null);
+      if( decodedToken && decodedToken.id ){
+        setDecodedToken(decodedToken);
+        setIsLoggedIn(true);
+        fetchUserProfile(token, decodedToken.id );
+      }
+      else {
+        console.error( `Decoded token or token ID is invalid!` );
+        setIsLoggedIn(false);
+        setUserProfile(null);
+      }
+    }
+    else {
+      setIsLoggedIn( false );
+      setUserProfile( null );
     }
   }, []);
 
-  const fetchUserProfile = async (token) => {
+  const fetchUserProfile = async (token, userId ) => {
     try {
-      const response = await apiClient.get(`/user/profile/${decodedToken.id}`, {
+      const response = await apiClient.get(`/user/profile/${ userId }`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUserProfile(response.data.data);
@@ -79,6 +87,7 @@ function App() {
                 <Route path = '/search/history' element = { <History /> } />  
                 <Route path = '/user/profile' element = { <Profile /> } />
                 <Route path = '/user/bookmark' element = { <Bookmark /> } /> 
+                <Route path = '/user/login' element = { <Login setIsLoggedIn = { setIsLoggedIn } setUserProfile = { setUserProfile } /> } /> 
               </>
             ):(
               <>

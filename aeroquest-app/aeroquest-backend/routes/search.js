@@ -110,7 +110,11 @@ router.get( '/history/:userId', authorizationMiddleware, async ( req, res, next 
         console.error( 'Error fetching user search history:', error.message );
         return res.status( 500 ).json({ error: 'Internal Server Error' });
     }
-})
+});
+
+
+// Remove Item from Search History 
+router.
 
 
 module.exports = router;

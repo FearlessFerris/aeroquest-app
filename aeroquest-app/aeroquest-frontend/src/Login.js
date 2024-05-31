@@ -52,7 +52,7 @@ function Login({ setIsLoggedIn, setUserProfile }) {
             }
         }
         catch( error ){
-            console.error( error.response.data.message );
+            console.error( `Error with login!!!`, error.response.data.message );
         }
     };
 

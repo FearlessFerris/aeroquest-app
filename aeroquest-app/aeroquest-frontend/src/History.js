@@ -66,6 +66,17 @@ function History(){
         }
     }, [ loading, searches ]);
 
+    const handleRemoveHistoryItem = ( index ) => {
+        const updateSearches = [ ...searches ];
+        console.log( `You clicked remove!!!`, updateSearches );
+        updateSearches.splice( index, 1 );
+        setSearches( updateSearches );
+
+        const updatedVisibleSearches = visibleSearches.filter(( vIndex ) => vIndex !== index );
+        console.log( updatedVisibleSearches );
+        setVisibleSearches( updatedVisibleSearches );
+    }
+
     return(
         <div 
             className = 'history-container'
@@ -114,7 +125,7 @@ function History(){
             </Typography>
             ):(
                 searches.map(( item, index ) => (
-                    <Fade in = {visibleSearches.includes(( index ))} timeout = { 1000 } key = { index }>
+                    <Fade in = {visibleSearches.includes(( index ))} timeout = {{ enter: 1000, exit: 1000 }} key = { index }>
                         <div 
                             style={{ 
                                 transition: 'transform 0.3s ease, box-shadow 0.3s ease' 
@@ -135,7 +146,7 @@ function History(){
                                 flexDirection: 'column',
                                 justifyContent: 'flex-start',
                                 width: '38rem',
-                                minHeight: '8rem',
+                                minHeight: '4rem',
                                 margin: 'auto',
                                 marginBottom: '2rem',
                                 textAlign: 'center',
@@ -196,6 +207,34 @@ function History(){
                                     >
                                         { item.search_timestamp }
                                     </Typography>
+                                </div>
+                                <div 
+                                    variant = 'h6'
+                                    style = {{
+                                        display: 'flex',
+                                        justifyContent: 'center'
+                                    }}
+                                >
+                                    <Button 
+                                        variant = 'outlined'
+                                        color = 'info'
+                                        sx = {{
+                                            color: 'cyan',
+                                            borderColor: 'cyan',
+                                            fontWeight: 'bold',
+                                            marginTop: '1vh',
+                                            marginBottom: '1vh',
+                                            '&:hover': {
+                                                color: '#212121',
+                                                borderColor: 'white',
+                                                backgroundColor: 'cyan',
+                                                fontWeight: 'bold'
+                                            },
+                                        }} 
+                                        onClick = { () => handleRemoveHistoryItem( index ) }
+                                    >
+                                    Remove 
+                                    </Button>
                                 </div>
                             </CardContent>
                         </Card>
