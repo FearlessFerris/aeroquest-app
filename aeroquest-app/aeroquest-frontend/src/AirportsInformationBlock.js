@@ -223,6 +223,12 @@ function AirplanesInformationBlock({ data }) {
                 in = { true }
                 timeout = { 1000 }
                 >
+                    <div 
+                            style={{ 
+                                transition: 'transform 0.3s ease, box-shadow 0.3s ease' 
+                            }}
+                        >
+
                 <Card
                     key={index}
                     sx={{
@@ -239,8 +245,13 @@ function AirplanesInformationBlock({ data }) {
                         width: '38rem',
                         minHeight: '13rem',
                         margin: 'auto',
-                        marginBottom: '10px',
-                        textAlign: 'center'
+                        marginBottom: '2rem',
+                        textAlign: 'center',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        '&:hover': {
+                            transform: 'translateY(-1rem)',
+                            boxShadow: '0 .5rem .8rem rgba(0, 0, 0, 0.2)',
+                        }
                     }}
                     >
                     <CardContent >
@@ -539,6 +550,7 @@ function AirplanesInformationBlock({ data }) {
                         </Button>
                     </CardContent>
                 </Card>
+            </div>
             </Fade>
             ))}
 

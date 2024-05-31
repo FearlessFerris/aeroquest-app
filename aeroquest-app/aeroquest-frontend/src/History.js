@@ -54,7 +54,7 @@ function History(){
             }
         }
         fetchHistory();
-    }, [])
+    }, []);
 
     useEffect( () => {
         if ( !loading && searches.length > 0 ){
@@ -88,7 +88,13 @@ function History(){
                     width: '38rem',
                     height: '5rem',
                     margin: '2rem',
-                    textAlign: 'center'
+                    marginBottom: '2rem',
+                    textAlign: 'center',
+                    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                    '&:hover': {
+                        transform: 'translateY(-1rem)',
+                        boxShadow: '0 .5rem .8rem rgba(0, 0, 0, 0.2)',
+                    }
                 }}
             >
             <span style={{
@@ -109,6 +115,11 @@ function History(){
             ):(
                 searches.map(( item, index ) => (
                     <Fade in = {visibleSearches.includes(( index ))} timeout = { 1000 } key = { index }>
+                        <div 
+                            style={{ 
+                                transition: 'transform 0.3s ease, box-shadow 0.3s ease' 
+                            }}
+                        >
                         { item.search_term && (
                             <Card
                             key={index}
@@ -126,8 +137,13 @@ function History(){
                                 width: '38rem',
                                 minHeight: '8rem',
                                 margin: 'auto',
-                                marginBottom: '1rem',
-                                textAlign: 'center'
+                                marginBottom: '2rem',
+                                textAlign: 'center',
+                                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                                '&:hover': {
+                                    transform: 'translateY(-1rem)',
+                                    boxShadow: '0 .5rem .8rem rgba(0, 0, 0, 0.2)',
+                                }
                             }}
                             >   
                             <CardContent>
@@ -137,14 +153,14 @@ function History(){
                                         display: 'flex',
                                         justifyContent: 'center'
                                     }}
-                                >
+                                    >
                                 <Typography
                                     variant = 'h6'
                                     style = {{
                                         color: 'white',
                                         marginRight: '1rem'
                                     }}
-                                >
+                                    >
                                     Search Term:  
                                 </Typography>
                                 <Typography
@@ -152,7 +168,7 @@ function History(){
                                     style = {{
                                         color: 'cyan'
                                     }}
-                                >
+                                    >
                                     { item.search_term  }
                                 </Typography>
                                 </div>
@@ -162,14 +178,14 @@ function History(){
                                         display: 'flex',
                                         justifyContent: 'center'
                                     }}
-                                >
+                                    >
                                     <Typography 
                                         variant = 'h6'
                                         style = {{
                                             color: 'white',
                                             marginRight: '1rem'
                                         }}
-                                    >
+                                        >
                                         Search Timestamp:
                                     </Typography>
                                     <Typography
@@ -184,6 +200,7 @@ function History(){
                             </CardContent>
                         </Card>
                     )}       
+                </div>
                 </Fade>
                 ))
             )}

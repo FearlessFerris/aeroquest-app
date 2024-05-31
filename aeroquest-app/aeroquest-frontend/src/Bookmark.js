@@ -175,7 +175,12 @@ function Bookmark() {
                     width: '38rem',
                     height: '5rem',
                     margin: '2rem',
-                    textAlign: 'center'
+                    textAlign: 'center',
+                    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                    '&:hover': {
+                        transform: 'translateY(-1rem)',
+                        boxShadow: '0 .5rem .8rem rgba(0, 0, 0, 0.2)',
+                    }
                 }}
             >
                 <span style={{
@@ -196,6 +201,12 @@ function Bookmark() {
             ) : (
                 bookmarks.map((item, index) => (
                     <Fade in={visibleBookmarks.includes(index)} timeout={1000} key={index}>
+                        <div 
+                            style={{ 
+                                transition: 'transform 0.3s ease, box-shadow 0.3s ease' 
+                            }}
+                        >
+
                         {item.response_data.model_name ? (
                             <Card
                                 key={index}
@@ -213,8 +224,13 @@ function Bookmark() {
                                     width: '38rem',
                                     height: selectedBoxIndex === index ? 'auto' : '11rem',
                                     margin: 'auto',
-                                    marginBottom: '1rem',
-                                    textAlign: 'center'
+                                    marginBottom: '2rem',
+                                    textAlign: 'center',
+                                    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                                    '&:hover': {
+                                        transform: 'translateY(-1rem)',
+                                        boxShadow: '0 .5rem .8rem rgba(0, 0, 0, 0.2)',
+                                    }
                                 }}
                             >
                                 <CardContent>
@@ -224,7 +240,7 @@ function Bookmark() {
                                             display: 'flex',
                                             justifyContent: 'center'
                                         }}
-                                    >
+                                        >
                                         <Typography
                                             variant='h6'
                                             style={{
@@ -264,7 +280,7 @@ function Bookmark() {
                                             style={{
                                                 color: 'cyan'
                                             }}
-                                        >
+                                            >
                                             {item.response_data.id}
                                         </Typography>
                                     </div>
@@ -304,7 +320,7 @@ function Bookmark() {
                                                     display: 'flex',
                                                     justifyContent: 'center'
                                                 }}
-                                            >
+                                                >
                                             { item.response_data.plane_series && (
                                                 <>
                                                 <Typography
@@ -332,7 +348,7 @@ function Bookmark() {
                                                     display: 'flex',
                                                     justifyContent: 'center'
                                                 }}
-                                            >
+                                                >
                                                 <Typography
                                                     variant='h6'
                                                     style={{
@@ -347,7 +363,7 @@ function Bookmark() {
                                                     style={{
                                                         color: 'cyan'
                                                     }}
-                                                >
+                                                    >
                                                     {item.response_data.plane_status}
                                                 </Typography>
                                             </div>
@@ -365,7 +381,7 @@ function Bookmark() {
                                                                 color: 'white',
                                                                 marginRight: '1rem'
                                                             }}
-                                                        >
+                                                            >
                                                             Engines Count:
                                                         </Typography>
                                                         <Typography
@@ -373,7 +389,7 @@ function Bookmark() {
                                                             style={{
                                                                 color: 'cyan'
                                                             }}
-                                                        >
+                                                            >
                                                             {item.response_data.engines_count}
                                                         </Typography>
                                                     </>
@@ -384,7 +400,7 @@ function Bookmark() {
                                                     display: 'flex',
                                                     justifyContent: 'center'
                                                 }}
-                                            >
+                                                >
                                                 {item.response_data.engines_type && (
                                                     <>
                                                         <Typography
@@ -393,7 +409,7 @@ function Bookmark() {
                                                                 color: 'white',
                                                                 marginRight: '1rem'
                                                             }}
-                                                        >
+                                                            >
                                                             Engines Type:
                                                         </Typography>
                                                         <Typography
@@ -440,7 +456,7 @@ function Bookmark() {
                                                     display: 'flex',
                                                     justifyContent: 'center'
                                                 }}
-                                            >
+                                                >
                                             { item.response_data.registration_number && (
                                                 <>
                                                 <Typography
@@ -468,7 +484,7 @@ function Bookmark() {
                                                     display: 'flex',
                                                     justifyContent: 'center'
                                                 }}
-                                            >
+                                                >
                                             { item.response_data.production_line && (
                                                 <>
                                                 <Typography
@@ -496,7 +512,7 @@ function Bookmark() {
                                                     display: 'flex',
                                                     justifyContent: 'center'
                                                 }}
-                                            >
+                                                >
                                             { item.response_data.delivery_date && (
                                                 <>
                                                 <Typography
@@ -524,7 +540,7 @@ function Bookmark() {
                                                     display: 'flex',
                                                     justifyContent: 'center'
                                                 }}
-                                            >
+                                                >
                                             { item.response_data.first_flight_date && (
                                                 <>
                                                 <Typography
@@ -580,7 +596,7 @@ function Bookmark() {
                                                     display: 'flex',
                                                     justifyContent: 'center'
                                                 }}
-                                            >
+                                                >
                                                 {item.notes && (
                                                     <>
                                                         <Typography
@@ -597,7 +613,7 @@ function Bookmark() {
                                                             style={{
                                                                 color: 'cyan'
                                                             }}
-                                                        >
+                                                            >
                                                             {item.notes}
                                                         </Typography>
                                                     </>
@@ -645,7 +661,7 @@ function Bookmark() {
                                             },
                                         }}
                                         onClick={() => handleEditNotes(item)}
-                                    >
+                                        >
                                         Edit Notes
                                     </Button>
                                     <Button
@@ -687,8 +703,13 @@ function Bookmark() {
                                     width: '38rem',
                                     height: selectedBoxIndex === index ? 'auto' : '11rem',
                                     margin: 'auto',
-                                    marginBottom: '1rem',
-                                    textAlign: 'center'
+                                    marginBottom: '2rem',
+                                    textAlign: 'center',
+                                    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                                    '&:hover': {
+                                        transform: 'translateY(-1rem)',
+                                        boxShadow: '0 .5rem .8rem rgba(0, 0, 0, 0.2)',
+                                    }
                                 }}
                             >
                                 <CardContent>
@@ -713,7 +734,7 @@ function Bookmark() {
                                             style={{
                                                 color: 'cyan'
                                             }}
-                                        >
+                                            >
                                             {item.response_data.airline_name}
                                         </Typography>
                                     </div>
@@ -723,14 +744,14 @@ function Bookmark() {
                                             display: 'flex',
                                             justifyContent: 'center'
                                         }}
-                                    >
+                                        >
                                         <Typography
                                             variant='h6'
                                             style={{
                                                 color: 'white',
                                                 marginRight: '1rem'
                                             }}
-                                        >
+                                            >
                                             Airline ID:
                                         </Typography>
                                         <Typography
@@ -738,7 +759,7 @@ function Bookmark() {
                                             style={{
                                                 color: 'cyan'
                                             }}
-                                        >
+                                            >
                                             {item.response_data.airline_id}
                                         </Typography>
                                     </div>
@@ -750,7 +771,7 @@ function Bookmark() {
                                                     display: 'flex',
                                                     justifyContent: 'center'
                                                 }}
-                                            >
+                                                >
                                             { item.response_data.icao_code && (
                                                 <>
                                                 <Typography
@@ -796,7 +817,7 @@ function Bookmark() {
                                                             style={{
                                                                 color: 'cyan'
                                                             }}
-                                                        >
+                                                            >
                                                             {item.response_data.iata_code}
                                                         </Typography>
                                                     </>
@@ -816,7 +837,7 @@ function Bookmark() {
                                                                 color: 'white',
                                                                 marginRight: '1rem'
                                                             }}
-                                                        >
+                                                            >
                                                             Status:
                                                         </Typography>
                                                         <Typography
@@ -835,7 +856,7 @@ function Bookmark() {
                                                     display: 'flex',
                                                     justifyContent: 'center'
                                                 }}
-                                            >
+                                                >
                                                 {item.response_data.callsign && (
                                                     <>
                                                         <Typography
@@ -852,7 +873,7 @@ function Bookmark() {
                                                             sx={{
                                                                 color: 'cyan'
                                                             }}
-                                                        >
+                                                            >
                                                             {item.response_data.callsign}
                                                         </Typography>
                                                     </>
@@ -863,7 +884,7 @@ function Bookmark() {
                                                     display: 'flex',
                                                     justifyContent: 'center'
                                                 }}
-                                            >
+                                                >
                                                 {item.response_data.fleet_average_age && (
                                                     <>
                                                         <Typography
@@ -900,7 +921,7 @@ function Bookmark() {
                                                                 color: 'white',
                                                                 marginRight: '1rem'
                                                             }}
-                                                        >
+                                                            >
                                                             Country Name:
                                                         </Typography>
                                                         <Typography
@@ -908,7 +929,7 @@ function Bookmark() {
                                                             sx={{
                                                                 color: 'cyan'
                                                             }}
-                                                        >
+                                                            >
                                                             {item.country_name}
                                                         </Typography>
                                                     </>
@@ -936,7 +957,7 @@ function Bookmark() {
                                                             style={{
                                                                 color: 'cyan'
                                                             }}
-                                                        >
+                                                            >
                                                             {item.notes}
                                                         </Typography>
                                                     </>
@@ -961,7 +982,7 @@ function Bookmark() {
                                             },
                                         }}
                                         onClick={() => displayFullDetails(index)}
-                                    >
+                                        >
                                         {selectedBoxIndex === index ? 'Hide Details' : 'Show Details'}
                                     </Button>
                                     <Button
@@ -1024,8 +1045,13 @@ function Bookmark() {
                                     width: '38rem',
                                     height: selectedBoxIndex === index ? 'auto' : '11rem',
                                     margin: 'auto',
-                                    marginBottom: '1rem',
-                                    textAlign: 'center'
+                                    marginBottom: '2rem',
+                                    textAlign: 'center',
+                                    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                                    '&:hover': {
+                                        transform: 'translateY(-1rem)',
+                                        boxShadow: '0 .5rem .8rem rgba(0, 0, 0, 0.2)',
+                                    }
                                 }}
                             >
                                 <CardContent>
@@ -1035,7 +1061,7 @@ function Bookmark() {
                                             display: 'flex',
                                             justifyContent: 'center'
                                         }}
-                                    >
+                                        >
                                         <Typography
                                             variant='h6'
                                             style={{
@@ -1059,14 +1085,14 @@ function Bookmark() {
                                             display: 'flex',
                                             justifyContent: 'center',
                                         }}
-                                    >
+                                        >
                                         <Typography
                                             variant='h6'
                                             style={{
                                                 color: 'white',
                                                 marginRight: '1rem'
                                             }}
-                                        >
+                                            >
                                             AirportID:
                                         </Typography>
                                         <Typography
@@ -1074,7 +1100,7 @@ function Bookmark() {
                                             style={{
                                                 color: 'cyan'
                                             }}
-                                        >
+                                            >
                                             {item.response_data.id}
                                         </Typography>
                                     </div>
@@ -1085,7 +1111,7 @@ function Bookmark() {
                                                     display: 'flex',
                                                     justifyContent: 'center',
                                                 }}
-                                            >
+                                                >
                                                 <Typography
                                                     variant='h6'
                                                     style={{
@@ -1100,7 +1126,7 @@ function Bookmark() {
                                                     sx={{
                                                         color: 'cyan'
                                                     }}
-                                                >
+                                                    >
                                                     {item.response_data.country_iso2}
                                                 </Typography>
                                             </div>
@@ -1109,7 +1135,7 @@ function Bookmark() {
                                                     display: 'flex',
                                                     justifyContent: 'center'
                                                 }}
-                                            >
+                                                >
                                                 {item.response_data.city_iata_code && (
                                                     <>
                                                         <Typography
@@ -1126,7 +1152,7 @@ function Bookmark() {
                                                             sx={{
                                                                 color: 'cyan'
                                                             }}
-                                                        >
+                                                            >
                                                             {item.response_data.city_iata_code}
                                                         </Typography>
                                                     </>
@@ -1146,7 +1172,7 @@ function Bookmark() {
                                                                 color: 'white',
                                                                 marginRight: '1rem'
                                                             }}
-                                                        >
+                                                            >
                                                             Geoname ID:
                                                         </Typography>
                                                         <Typography
@@ -1154,7 +1180,7 @@ function Bookmark() {
                                                             sx={{
                                                                 color: 'cyan'
                                                             }}
-                                                        >
+                                                            >
                                                             {item.response_data.geoname_id}
                                                         </Typography>
                                                     </>
@@ -1174,7 +1200,7 @@ function Bookmark() {
                                                                 color: 'white',
                                                                 marginRight: '1rem'
                                                             }}
-                                                        >
+                                                            >
                                                             Latitude:
                                                         </Typography>
                                                         <Typography
@@ -1193,7 +1219,7 @@ function Bookmark() {
                                                     display: 'flex',
                                                     justifyContent: 'center'
                                                 }}
-                                            >
+                                                >
                                                 {item.response_data.longitude && (
                                                     <>
                                                         <Typography
@@ -1202,7 +1228,7 @@ function Bookmark() {
                                                                 color: 'white',
                                                                 marginRight: '1rem'
                                                             }}
-                                                        >
+                                                            >
                                                             Longitude:
                                                         </Typography>
                                                         <Typography
@@ -1230,7 +1256,7 @@ function Bookmark() {
                                                                 color: 'white',
                                                                 marginRight: '1rem'
                                                             }}
-                                                        >
+                                                            >
                                                             Country Name:
                                                         </Typography>
                                                         <Typography
@@ -1286,7 +1312,7 @@ function Bookmark() {
                                                                 color: 'white',
                                                                 marginRight: '1rem'
                                                             }}
-                                                        >
+                                                            >
                                                             Notes:
                                                         </Typography>
                                                         <Typography
@@ -1366,6 +1392,7 @@ function Bookmark() {
                                 </CardContent>
                             </Card>
                         ) : null}
+                    </div>
                     </Fade>
                 ))
             )}
@@ -1376,7 +1403,7 @@ function Bookmark() {
                 onClose={handleCloseNotes}
                 fullWidth
                 maxWidth='md'
-            >
+                >
                 <DialogTitle
                     style={{
                         backgroundColor: '#212121',
