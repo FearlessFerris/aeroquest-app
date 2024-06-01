@@ -78,7 +78,7 @@ function EditForm({ profile, onSubmit, onCancel }) {
                         style: { color: 'white' },
                     }}
                     InputProps = {{
-                        autoComplete: 'new-username'
+                        autoComplete: 'username'
                     }}
                     value = { editedProfile.username || '' }
                     onChange = { handleChange }

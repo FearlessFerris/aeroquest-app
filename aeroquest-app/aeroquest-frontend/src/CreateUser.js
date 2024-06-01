@@ -147,6 +147,9 @@ function CreateUser() {
                     InputLabelProps={{
                         style: { color: 'white' },
                     }}
+                    InputProps = {{
+                        autoComplete: 'username'
+                    }}
                     value = { formData.username }
                     onChange = { handleChange }
                     sx={{
