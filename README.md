@@ -105,9 +105,9 @@ Below you will find an example of the information that is available to be retrie
    }
     ```
 
-### Getting Started
+<!-- ### Getting Started
 
 Create an account!
 <video controls width="800" height="500">
   <source src="aeroquest-app/aeroquest-frontend/src/static/video/CreateDemo.mp4" type="video/mp4">
-</video>
+</video> -->
