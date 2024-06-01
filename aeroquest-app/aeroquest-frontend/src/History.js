@@ -26,7 +26,6 @@ function History(){
         if (token) {
             try {
                 const decoded = jwtDecode(token);
-                console.log( decoded );
                 return { userId: decoded.id, token };
             } catch (error) {
                 console.error('Invalid token:', error);
@@ -40,7 +39,6 @@ function History(){
         const fetchHistory = async () => {
             try{
                 const { userId, token } = getUserId();
-                console.log( userId, token );
                 const response = await apiClient.get( `/search/history/${ userId }`, {
                     headers: {
                         Authorization: `Bearer ${ token }`
@@ -66,15 +64,28 @@ function History(){
         }
     }, [ loading, searches ]);
 
-    const handleRemoveHistoryItem = ( index ) => {
-        const updateSearches = [ ...searches ];
-        console.log( `You clicked remove!!!`, updateSearches );
-        updateSearches.splice( index, 1 );
-        setSearches( updateSearches );
-
-        const updatedVisibleSearches = visibleSearches.filter(( vIndex ) => vIndex !== index );
-        console.log( updatedVisibleSearches );
-        setVisibleSearches( updatedVisibleSearches );
+    const handleRemoveHistoryItem = async ( searchId, index ) => {
+        try{
+            const { userId, token } = getUserId();
+            const response = await apiClient.delete( `/search/remove`, {
+                headers: {
+                    Authorization: `Bearer ${ token }`
+                },
+                data: { userId, searchId },
+            });
+            if (response.status === 200) {
+                setVisibleSearches((prevVisible) => prevVisible.filter((vIndex) => vIndex !== index));
+                setTimeout(() => {
+                    setSearches((prevSearches) => prevSearches.filter((_, i) => i !== index));
+                }, 1000);
+            }
+            else{
+                console.error( `Failed to remove search item!` );
+            }
+        }
+        catch( error ){
+            console.error( error );
+        }
     }
 
     return(
@@ -231,7 +242,7 @@ function History(){
                                                 fontWeight: 'bold'
                                             },
                                         }} 
-                                        onClick = { () => handleRemoveHistoryItem( index ) }
+                                        onClick = { () => handleRemoveHistoryItem( item.id, index ) }
                                     >
                                     Remove 
                                     </Button>

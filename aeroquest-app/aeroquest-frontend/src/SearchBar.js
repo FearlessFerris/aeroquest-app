@@ -75,7 +75,6 @@ function SearchBar({ searchResults, setSearchResults }) {
             }
     
             const response = await apiClient.post('/search/add', requestBody, { headers });
-            console.log(response.data);
         } catch (error) {
             console.error('Error adding your search to search history!', error);
         }

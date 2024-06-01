@@ -114,8 +114,25 @@ router.get( '/history/:userId', authorizationMiddleware, async ( req, res, next 
 
 
 // Remove Item from Search History 
-router.
-
+router.delete('/remove', authorizationMiddleware, async (req, res, next) => {
+    const { userId, searchId } = req.body;
+    console.log(userId, searchId);
+    try {
+        const result = await pool.query(
+            `DELETE FROM search_history WHERE user_id = $1 AND id = $2 RETURNING *`, 
+            [userId, searchId]
+        );
+        if (result.rowCount > 0) { 
+            console.log('Search term removed from history:', result.rows[0]);
+            return res.status(200).json({ message: 'Search Item was successfully removed!' });
+        } else {
+            return res.status(404).json({ message: 'No search item found with the specified ID!' });
+        }
+    } catch (error) {
+        console.error('Error removing search item', error.message);
+        return res.status(500).json({ message: 'Internal Server Error!' });
+    }
+});
 
 module.exports = router;
 
