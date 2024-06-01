@@ -187,6 +187,9 @@ function CreateUser() {
                     InputLabelProps={{
                         style: { color: 'white' },
                     }}
+                    InputProps = {{
+                        autoComplete: 'new-password'
+                    }}
                     value = { formData.password }
                     onChange = { handleChange }
                     sx={{
@@ -227,6 +230,9 @@ function CreateUser() {
                     type = 'password'
                     InputLabelProps={{
                         style: { color: 'white' },
+                    }}
+                    InputProps = {{
+                        autoComplete: 'new-password'
                     }}
                     value = { formData.confirmPassword }
                     onChange = { handleChange }

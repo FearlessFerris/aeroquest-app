@@ -117,6 +117,9 @@ function EditForm({ profile, onSubmit, onCancel }) {
                     InputLabelProps={{
                         style: { color: 'white' },
                     }}
+                    InputProps = {{
+                        autoComplete: 'new-password'
+                    }}
                     value = { editedProfile.password || '' }
                     onChange = { handleChange }
                     sx={{
@@ -156,6 +159,9 @@ function EditForm({ profile, onSubmit, onCancel }) {
                     type = 'password'
                     InputLabelProps={{
                         style: { color: 'white' },
+                    }}
+                    InputProps = {{
+                        autoComplete: 'new-password'
                     }}
                     value = { editedProfile.confirmPassword || '' }
                     onChange = { handleChange }
