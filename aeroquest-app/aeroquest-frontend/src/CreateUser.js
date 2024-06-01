@@ -183,6 +183,7 @@ function CreateUser() {
                     color = 'primary'
                     size = 'medium'
                     placeholder = 'Ex: SomethingSecretshhh87...'
+                    type = 'password'
                     InputLabelProps={{
                         style: { color: 'white' },
                     }}
@@ -223,6 +224,7 @@ function CreateUser() {
                     color = 'primary'
                     size = 'medium'
                     placeholder = 'Psst. Make sure this matches your password'
+                    type = 'password'
                     InputLabelProps={{
                         style: { color: 'white' },
                     }}

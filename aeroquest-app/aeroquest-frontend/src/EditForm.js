@@ -113,6 +113,7 @@ function EditForm({ profile, onSubmit, onCancel }) {
                     color = 'primary'
                     size = 'medium'
                     placeholder = 'Ex: SomethingSecretshhh87...'
+                    type = 'password'
                     InputLabelProps={{
                         style: { color: 'white' },
                     }}
@@ -152,6 +153,7 @@ function EditForm({ profile, onSubmit, onCancel }) {
                     color = 'primary'
                     size = 'medium'
                     placeholder = 'Ex: SomethingSecretshhh87...'
+                    type = 'password'
                     InputLabelProps={{
                         style: { color: 'white' },
                     }}

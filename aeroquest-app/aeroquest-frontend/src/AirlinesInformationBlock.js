@@ -82,8 +82,6 @@ function AirplanesInformationBlock({ data }) {
             }
 
             const existingBookmark = bookmarks.find((bookmark) => bookmark.response_data.id === item.id);
-            console.log(existingBookmark ? existingBookmark.id : 'No existing bookmark');
-            console.log(item.id);
             if (existingBookmark) {
                 setItemInfo((prevInfo) => ({
                     ...prevInfo,

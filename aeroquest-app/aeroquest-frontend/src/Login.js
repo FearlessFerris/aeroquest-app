@@ -152,6 +152,7 @@ function Login({ setIsLoggedIn, setUserProfile }) {
                     color = 'primary'
                     size = 'medium'
                     placeholder = 'Ex: not123'
+                    type = 'password'
                     InputLabelProps={{
                         style: { color: 'white' },
                     }}

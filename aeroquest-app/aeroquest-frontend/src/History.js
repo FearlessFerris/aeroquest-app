@@ -20,6 +20,7 @@ function History(){
     const [ searches, setSearches ] = useState([]);
     const [ visibleSearches, setVisibleSearches ] = useState([]);
     const [ loading, setLoading ] = useState( true );
+    const [ removingItemId, setRemovingItemId ] = useState( null );
 
     const getUserId = () => {
         const token = localStorage.getItem('token');
@@ -56,37 +57,37 @@ function History(){
 
     useEffect( () => {
         if ( !loading && searches.length > 0 ){
-            searches.forEach(( _, index ) => {
+            searches.forEach(( item, index ) => {
                 setTimeout( () => {
-                    setVisibleSearches(( prevVisible ) => [ ...prevVisible, index ]);
+                    setVisibleSearches(( prevVisible ) => [ ...prevVisible, item.id ] );
                 }, index * 500 );
             });
         }
     }, [ loading, searches ]);
 
-    const handleRemoveHistoryItem = async ( searchId, index ) => {
-        try{
+    const handleRemoveHistoryItem = async (searchId) => {
+        try {
             const { userId, token } = getUserId();
-            const response = await apiClient.delete( `/search/remove`, {
+            const response = await apiClient.delete(`/search/remove`, {
                 headers: {
-                    Authorization: `Bearer ${ token }`
+                    Authorization: `Bearer ${token}`
                 },
                 data: { userId, searchId },
             });
             if (response.status === 200) {
-                setVisibleSearches((prevVisible) => prevVisible.filter((vIndex) => vIndex !== index));
+                setRemovingItemId(searchId);
                 setTimeout(() => {
-                    setSearches((prevSearches) => prevSearches.filter((_, i) => i !== index));
+                    setSearches((prevSearches) => prevSearches.filter(item => item.id !== searchId));
+                    setVisibleSearches((prevVisible) => prevVisible.filter(id => id !== searchId));
+                    setRemovingItemId(null);
                 }, 1000);
+            } else {
+                console.error('Failed to remove search item!');
             }
-            else{
-                console.error( `Failed to remove search item!` );
-            }
+        } catch (error) {
+            console.error(error);
         }
-        catch( error ){
-            console.error( error );
-        }
-    }
+    };
 
     return(
         <div 
@@ -136,7 +137,7 @@ function History(){
             </Typography>
             ):(
                 searches.map(( item, index ) => (
-                    <Fade in = {visibleSearches.includes(( index ))} timeout = {{ enter: 1000, exit: 1000 }} key = { index }>
+                    <Fade in = {visibleSearches.includes( item.id ) && removingItemId !== item.id } timeout = {{ enter: 1000, exit: 1000 }} key = { index }>
                         <div 
                             style={{ 
                                 transition: 'transform 0.3s ease, box-shadow 0.3s ease' 
@@ -144,8 +145,8 @@ function History(){
                         >
                         { item.search_term && (
                             <Card
-                            key={index}
-                            sx={{
+                            key = { item.id }
+                            sx = {{
                                 alignItems: 'center',
                                 backgroundColor: '#212121',
                                 border: '.2rem solid white',
