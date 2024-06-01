@@ -137,7 +137,7 @@ function Profile() {
                 >
                     <Avatar
                     alt = { profile ? `${ profile.username }` : 'Loading...'}
-                    src = { profile ? `${ profile.image_url }` : 'Loading...'}
+                    src = { profile ? `${ profile.image_url }` : '' }
                     sx = {{ 
                         width: 250, 
                         height: 250, 
