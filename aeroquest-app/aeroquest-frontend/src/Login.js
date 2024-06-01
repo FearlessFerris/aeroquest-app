@@ -116,6 +116,9 @@ function Login({ setIsLoggedIn, setUserProfile }) {
                     InputLabelProps={{
                         style: { color: 'white' },
                     }}
+                    InputProps = {{
+                        autoComplete: 'new-username'
+                    }}
                     value = { formData.username }
                     onChange = { handleChange }
                     sx={{
