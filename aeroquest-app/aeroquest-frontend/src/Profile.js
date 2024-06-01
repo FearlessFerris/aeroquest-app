@@ -6,7 +6,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Avatar, Box, Card, CardHeader, Typography, TextField, Button } from '@mui/material'
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
-// import axios from 'axios';
 import apiClient from './apiClient';
 import { jwtDecode } from 'jwt-decode';
 
