@@ -45,7 +45,8 @@ function History(){
                         Authorization: `Bearer ${ token }`
                     }
                 });
-                setSearches( response.data.searches );
+                console.log( response.data.message );
+                setSearches( response.data.searches || [] );
                 setLoading( false );
             }
             catch( error ){

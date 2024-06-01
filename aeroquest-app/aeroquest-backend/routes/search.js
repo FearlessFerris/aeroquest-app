@@ -103,8 +103,13 @@ router.get( '/history/:userId', authorizationMiddleware, async ( req, res, next 
         const { userId } = req.params;
         const query = `SELECT * FROM search_history WHERE user_id = $1`;
         const result = await pool.query( query, [ userId ]);
-        const searches = result.rows;
-        res.status( 200 ).json({ message: 'Successfully retrieved user history!', searches });
+        if (result.rows.length > 0) {
+            const searches = result.rows;
+            console.log(searches);
+            return res.status(200).json({ message: 'Successfully retrieved user history!', searches });
+        } else {
+            return res.status(200).json({ message: 'No searches in user history!' });
+        }
     }
     catch( error ){
         console.error( 'Error fetching user search history:', error.message );
