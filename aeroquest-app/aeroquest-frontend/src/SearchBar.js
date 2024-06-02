@@ -25,21 +25,6 @@ function SearchBar({ searchResults, setSearchResults }) {
     const [ visibleSearchResults, setVisibleSearchResults ] = useState([]);
     const [ searchResultVisibility, setSearchResultVisibility ] = useState([]);
 
-    const getUserId = () => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            try {
-                const decoded = jwtDecode(token);
-                console.log( decoded );
-                return { userId: decoded.id, token };
-            } catch (error) {
-                console.error('Invalid token:', error);
-                return { userId: null, token: null };
-            }
-        }
-        return { userId: null, token: null };
-    };
-
     const handleChange = ( e ) => {
         setSearchTerm( e.target.value );
     }; 
@@ -62,26 +47,6 @@ function SearchBar({ searchResults, setSearchResults }) {
         fetchResults();
     };
 
-    // const sendSearchHistory = async (searchTerm) => {
-    //     try {
-    //         const token = localStorage.getItem('token');
-    //         let requestBody = { searchTerm };
-    //         let headers = {};
-    
-    //         if (token) {
-    //             const userId = jwtDecode(token).id;
-    //             requestBody.userId = userId;
-    //             headers.Authorization = `Bearer ${token}`;
-    //         }
-            
-    //         const response = await apiClient.post('/search/add', requestBody, { headers });
-    //         console.log( response.data );
-        
-    //     } catch (error) {
-    //         console.error('Error adding your search to search history!', error);
-    //     }
-    // };
-    
     const sendSearchHistory = async (searchTerm) => {
         try {
             const token = localStorage.getItem('token');
@@ -99,7 +64,6 @@ function SearchBar({ searchResults, setSearchResults }) {
             console.error('Error adding your search to search history!', error);
         }
     };
-    
 
     const fetchResults = async () => {
         try {

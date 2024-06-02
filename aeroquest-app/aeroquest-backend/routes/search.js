@@ -116,13 +116,14 @@ router.post( '/add', authorizationMiddleware, async ( req, res, next ) => {
         RETURNING *`;
         const values = [ searchTerm, userId ];
         const result = await pool.query( query, values );
+        console.log( result.rows );
 
         if ( result.rows.length > 0 ){
             const search = result.rows[0];
             return res.status( 200 ).json({ message: `Successfully added ${ searchTerm } to user search history!`, data: search }); 
         }
         else{
-            throw new ExpressError( `Failed to add search to search history!` );
+            throw new Error( `Failed to add search to search history!` );
         }
 
     }
