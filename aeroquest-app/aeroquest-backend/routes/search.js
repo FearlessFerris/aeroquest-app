@@ -109,6 +109,7 @@ router.post( '/add', authorizationMiddleware, async ( req, res, next ) => {
 
         const { searchTerm } = req.body;
         const userId = req.user.id;
+        console.log( userId );
         const query = `
         INSERT INTO search_history ( search_term, user_id )
         VALUES ( $1, $2 )
@@ -139,7 +140,6 @@ router.get( '/history/:userId', authorizationMiddleware, async ( req, res, next 
         const result = await pool.query( query, [ userId ]);
         if (result.rows.length > 0) {
             const searches = result.rows;
-            console.log(searches);
             return res.status(200).json({ message: 'Successfully retrieved user history!', searches });
         } else {
             return res.status(200).json({ message: 'No searches in user history!' });
