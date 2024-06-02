@@ -35,7 +35,6 @@ function App() {
       if( decodedToken && decodedToken.id ){
         setDecodedToken(decodedToken);
         setIsLoggedIn(true);
-        console.log( 'Fetching User Profile!!!' );
         fetchUserProfile(token, decodedToken.id );
       }
       else {
@@ -55,7 +54,6 @@ function App() {
       const response = await apiClient.get(`/user/profile/${ userId }`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log( response.data.data );
       setUserProfile(response.data.data);
     } catch (error) {
       console.error('Error fetching user profile:', error);

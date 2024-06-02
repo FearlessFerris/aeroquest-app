@@ -63,38 +63,72 @@ router.get( '/:type', async ( req, res, next ) => {
 
 
 // Add Item to Search History 
-router.post('/add', authorizationMiddleware, async (req, res, next) => {
-    try {
-        const { searchTerm, userId: bodyUserId } = req.body;
-        const tokenUserId = req.user?.id;
+// router.post('/add', authorizationMiddleware, async (req, res, next) => {
+//     try {
+//         console.log( `Req User: `, req.user );
+//         console.log( `Request Body: `, req.body );
+//         const { searchTerm, userId: bodyUserId } = req.body;
+//         const tokenUserId = req.user?.id;
 
-        console.log('Request body:', req.body);
-        console.log('User from token:', req.user);
 
-        let query = '';
-        let values = [searchTerm];
-        const userId = tokenUserId || bodyUserId;
+//         let query = '';
+//         let values = [searchTerm];
+//         const userId = tokenUserId || bodyUserId;
+
+//         console.log( `UserID: `, userId );
+//         console.log( `Values: `, values );
         
-        if (userId) {
-            query = `INSERT INTO search_history (search_term, user_id) VALUES ($1, $2) RETURNING *`;
-            values.push(userId);
-        } else {
-            query = `INSERT INTO search_history (search_term) VALUES ($1) RETURNING *`;
+//         if (userId) {
+//             query = `INSERT INTO search_history (search_term, user_id) VALUES ($1, $2) RETURNING *`;
+//             values.push(userId);
+//         } else {
+//             query = `INSERT INTO search_history (search_term) VALUES ($1) RETURNING *`;
+//         }
+
+//         const result = await pool.query(query, values);
+//         console.log( `Result: `, result.rows[0] );
+
+//         if ( result.rows.length > 0 ) {
+//             console.log('Search term added to history:', result.rows[0]);
+//             const search = result.rows[0];
+//             return res.status(200).json({ message: `${searchTerm} was added to the search history!`, data: search });
+//         } else {
+//             throw new Error('Failed to add search to search history');
+//         }
+//     } catch (error) {
+//         console.error('Error adding search to search history:', error.message);
+//         return res.status(500).json({ error: 'Internal Server Error' });
+//     }
+// });
+
+router.post( '/add', authorizationMiddleware, async ( req, res, next ) => {
+    try{
+        if( !req.user ){
+            return res.status( 401 ).json({ message: 'Unauthorized!' });
         }
 
-        const result = await pool.query(query, values);
+        const { searchTerm } = req.body;
+        const userId = req.user.id;
+        const query = `
+        INSERT INTO search_history ( search_term, user_id )
+        VALUES ( $1, $2 )
+        RETURNING *`;
+        const values = [ searchTerm, userId ];
+        const result = await pool.query( query, values );
 
-        if (result.rows.length > 0) {
-            console.log('Search term added to history:', result.rows[0]);
-            return res.status(200).json({ message: `${searchTerm} was added to the search history!`, data: result.rows[0] });
-        } else {
-            throw new Error('Failed to add search to search history');
+        if ( result.rows.length > 0 ){
+            const search = result.rows[0];
+            return res.status( 200 ).json({ message: `Successfully added ${ search } to user search history!`, data: search }); 
         }
-    } catch (error) {
-        console.error('Error adding search to search history:', error.message);
-        return res.status(500).json({ error: 'Internal Server Error' });
+        else{
+            throw new ExpressError( `Failed to add search to search history!` );
+        }
+
     }
-});
+    catch( error ){
+        console.error( `Error adding search term to search history!`, error.message );
+    }
+})
 
 
 // Get Search History of User 

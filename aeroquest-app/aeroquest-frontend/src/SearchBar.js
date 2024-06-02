@@ -62,19 +62,30 @@ function SearchBar({ searchResults, setSearchResults }) {
         fetchResults();
     };
 
+    // const sendSearchHistory = async (searchTerm) => {
+    //     try {
+    //         const token = localStorage.getItem('token');
+    //         let requestBody = { searchTerm };
+    //         let headers = {};
+    
+    //         if (token) {
+    //             const userId = jwtDecode(token).id;
+    //             requestBody.userId = userId;
+    //             headers.Authorization = `Bearer ${token}`;
+    //         }
+            
+    //         const response = await apiClient.post('/search/add', requestBody, { headers });
+    //         console.log( response.data );
+        
+    //     } catch (error) {
+    //         console.error('Error adding your search to search history!', error);
+    //     }
+    // };
+    
     const sendSearchHistory = async (searchTerm) => {
         try {
-            const token = localStorage.getItem('token');
-            let requestBody = { searchTerm };
-            let headers = {};
-    
-            if (token) {
-                const userId = jwtDecode(token).id;
-                requestBody.userId = userId;
-                headers.Authorization = `Bearer ${token}`;
-            }
-    
-            const response = await apiClient.post('/search/add', requestBody, { headers });
+            const response = await apiClient.post('/search/add', { searchTerm });
+            console.log(response.data);
         } catch (error) {
             console.error('Error adding your search to search history!', error);
         }
