@@ -118,7 +118,7 @@ router.post( '/add', authorizationMiddleware, async ( req, res, next ) => {
 
         if ( result.rows.length > 0 ){
             const search = result.rows[0];
-            return res.status( 200 ).json({ message: `Successfully added ${ search } to user search history!`, data: search }); 
+            return res.status( 200 ).json({ message: `Successfully added ${ searchTerm } to user search history!`, data: search }); 
         }
         else{
             throw new ExpressError( `Failed to add search to search history!` );

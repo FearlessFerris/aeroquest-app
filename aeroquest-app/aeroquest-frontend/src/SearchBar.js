@@ -84,7 +84,16 @@ function SearchBar({ searchResults, setSearchResults }) {
     
     const sendSearchHistory = async (searchTerm) => {
         try {
-            const response = await apiClient.post('/search/add', { searchTerm });
+            const token = localStorage.getItem('token');
+            if (!token) {
+                throw new Error('Token not found');
+            }
+    
+            const headers = {
+                Authorization: `Bearer ${token}`,
+            };
+    
+            const response = await apiClient.post('/search/add', { searchTerm }, { headers });
             console.log(response.data);
         } catch (error) {
             console.error('Error adding your search to search history!', error);
